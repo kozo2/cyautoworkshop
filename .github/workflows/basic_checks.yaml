@@ -1,4 +1,7 @@
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
 
 env:
   cache-version: v1
