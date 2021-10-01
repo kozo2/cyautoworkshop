@@ -1,11 +1,11 @@
-Package: BuildABiocWorkshop
+Package: cyautoworkshop
 Title: Bioconductor Workshop Template and Github Actions
 Version: 0.9.0
 Authors@R: 
-    person(given = "Sean",
-           family = "Davis",
+    person(given = "Kozo",
+           family = "Nishida",
            role = c("aut", "cre"),
-           email = "seandavi@gmail.com",
+           email = "kozo.nishida@gmail.com",
            comment = c(ORCID = "your-orc-id-here"))
 Description: This package serves as a template for using github actions to 
     prepare a Bioconductor Workshop package for use. In particular,
@@ -23,7 +23,7 @@ Suggests:
     knitr,
     rmarkdown,
     pkgdown
-URL: https://seandavi.github.io/BuildABiocWorkshop/
-BugReports: https://github.com/seandavi/BuildABiocWorkshop/issues/new/choose
+URL: https://kozo2.github.io/cyautoworkshop/
+BugReports: https://github.com/kozo2/cyautoworkshop/issues/new/choose
 VignetteBuilder: knitr
-DockerImage: seandavi/buildabiocworkshop:latest
+DockerImage: kozo2/cyautoworkshop:latest
