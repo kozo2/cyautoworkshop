@@ -5,7 +5,7 @@ on:
 
 env:
   cache-version: v1
-  repo-name: seandavi/buildabiocworkshop
+  repo-name: kozo2/cyautoworkshop
 
 jobs:
   job1:
@@ -34,6 +34,9 @@ jobs:
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
+          apt-get update
+          apt-get -y upgrade
+          apt-get install -y xvfb default-jdk
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
