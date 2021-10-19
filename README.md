@@ -1,53 +1,26 @@
-# BuildABiocWorkshop
+# Cytoscape automation with RCy3
 
-This package is a template for building a Bioconductor workshop. The package
-includes Github actions to:
+This repository provides biologically relevant analyses using the [RCy3](https://bioconductor.org/packages/RCy3/) package.
+You can run R analyses locally in the provided Docker container, or on the Cloud for free.
 
-1. Set up bioconductor/bioconductor_docker:devel on Github resources
-2. Install package dependencies for your package (based on the `DESCRIPTION` file)
-3. Run `rcmdcheck::rcmdcheck`
-4. Build a pkgdown website and push it to github pages
-5. Build a docker image with the installed package and dependencies
+## Running on the Cloud for free
 
-## Responsibilities
+A machine with all dependencies, code from this repository, and Jupyterlab (with R) is available at http://app.orchestra.cancerdatasci.org/ (search for the Cytoscape). You can use these machines for up to 8 hours at a time.
 
-This year, package authors will be primarily responsible for:
+## Running locally using Docker
 
-1. Creating a landing site of their choosing for their workshops (a website). This website should be listed in the `DESCRIPTION` file as the `URL`.
-2. Creating a docker account and image that will contain workshop materials and the installed packages necessary to run those materials. The name of the resulting docker image, including "tag" if desired, should be listed in a non-standard tag, `DockerImage:` in the `DESCRIPTION` file. 
+### Requirements
 
-Both of those tasks can be accomplished using the Github actions included in this template package. The vignette accompanying this package describes how to accomplish both of these tasks.
+You need [Docker](https://docs.docker.com/get-docker/).
 
-## Details
+### Getting Started
 
-For detailed instructions, see the `How to build a workshop` article/vignette.
+First pull the image:
 
-## Results of successful deployment
+    docker pull kozo2/cyautoworkshop
 
-- A working docker image that contains the installed package and dependencies.
-- An up-to-date `pkgdown` website at https://YOURUSERNAME.github.io/YOURREPOSITORYNAME/
-- Docker image will be tagged with `latest`, `sha-XXXXXX` where `XXXXXX` is the hash of the current `master` commit, and `master`. 
+Then run a container based on the image:
 
-## To use the resulting image:
+    docker run -d -p 8888:8888 kozo2/cyautoworkshop
 
-```sh
-docker run -e PASSWORD=<choose_a_password_for_rstudio> -p 8787:8787 YOURDOCKERIMAGENAME
-```
-Once running, navigate to https://localhost:8787/ and then login with `rstudio`:`yourchosenpassword`. 
-
-To try with **this** repository docker image:
-
-```sh
-docker run -e PASSWORD=abc -p 8787:8787 seandavi/buildabiocworkshop2020
-```
-
-*NOTE*: Running docker that uses the password in plain text like above exposes the password to others 
-in a multi-user system (like a shared workstation or compute node). In practice, consider using an environment 
-variable instead of plain text to pass along passwords and other secrets in docker command lines. 
-
-
-## Whatcha get
-
-https://seandavi.github.io/BuildABiocWorkshop
-
-![dockerhub](https://github.com/seandavi/BuildABiocWorkshop/raw/master/inst/images/dockerhub_result.png)
+Visit http://localhost:8888 in your browser.
