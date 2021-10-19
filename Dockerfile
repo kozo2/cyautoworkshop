@@ -1,12 +1,25 @@
 FROM bioconductor/bioconductor_docker:devel
 
-WORKDIR /home/rstudio
+LABEL name="kozo2/cyautoworkshop"
 
-COPY --chown=rstudio:rstudio . /home/rstudio/
+# For additional options in Jupyter-Server-Proxy
+ENV RSESSION_PROXY_RSTUDIO_1_4="True"
 
-RUN apt-get update && \
-    apt-get install -y xvfb default-jdk && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-RUN Rscript -e "options(repos = c(CRAN = 'https://cran.r-project.org')); BiocManager::install(ask=FALSE)"
-RUN Rscript -e "options(repos = c(CRAN = 'https://cran.r-project.org')); devtools::install('.', dependencies=TRUE, build_vignettes=TRUE, repos = BiocManager::repositories())"
+COPY scripts /tmp
+
+# Install Jupyterhub, IRkernel, and curatedMetagenomicAnalyses dependencies
+RUN bash /tmp/install.sh \
+  && R -f /tmp/install.R \
+  && rm -rf /tmp/install* \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+USER kozo2
+
+WORKDIR /home/kozo2
+
+EXPOSE 8888
+
+ENTRYPOINT ["/init"]
+
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--port=8888"]
