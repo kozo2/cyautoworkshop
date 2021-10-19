@@ -180,26 +180,31 @@ jobs:
         if: github.ref == 'refs/heads/main' && env.run_pkgdown == 'true' && runner.os == 'Linux'
         run: R CMD INSTALL .
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+      - name: Deploy package
+        if: github.ref == 'refs/heads/main' && env.run_pkgdown == 'true' && runner.os == 'Linux'
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          Rscript -e "pkgdown::deploy_to_branch(new_process = FALSE)"
+        shell: bash {0}
+        ## Note that you need to run pkgdown::deploy_to_branch(new_process = FALSE)
+        ## at least one locally before this will work. This creates the gh-pages
+        ## branch (erasing anything you haven't version controlled!) and
+        ## makes the git history recognizable by pkgdown.
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@master
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: docs # The folder the action should deploy.
+          name: ${{ runner.os }}-biocversion-RELEASE_3_12-r-4.0-results
+          path: check
 
       - uses: docker/build-push-action@v1
+        if: "!contains(github.event.head_commit.message, '/nodocker') && env.run_docker == 'true' && runner.os == 'Linux' "
         with:
-          # The two entries below need to be entered as 
-          # github secrets. The "secret" names are "DOCKER_USERNAME"
-          # and "DOCKER_PASSWORD". See https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository
-          # for detailed instructions. 
-          #
-          # DO NOT EDIT THESE ENTRIES HERE. Doing so will 
-          # expose your docker username and password on github.
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          # Use the environment variable on first few lines to set repo name--just centralizes changes
-          repository: ${{ env.repo-name }}
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: kozo2/cyautoworkshop
           tag_with_ref: true
           tag_with_sha: true
           tags: latest
