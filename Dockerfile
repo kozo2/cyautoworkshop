@@ -3,7 +3,7 @@ FROM bioconductor/bioconductor_docker:devel
 LABEL name="kozo2/cyautoworkshop"
 
 # For additional options in Jupyter-Server-Proxy
-ENV RSESSION_PROXY_RSTUDIO_1_4="True"
+#ENV RSESSION_PROXY_RSTUDIO_1_4="True"
 
 COPY scripts /tmp
 
