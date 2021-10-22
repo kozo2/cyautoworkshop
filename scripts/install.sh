@@ -4,22 +4,18 @@ REPOSITORY="cyautoworkshop"
 PASSWORD=${PASSWORD:=kozo2}
 
 # Install JupyterHub dependencies
-apt-get update
-apt-get install -y --no-install-recommends npm nodejs libzmq3-dev
-npm install -g configurable-http-proxy
-rm -rf ~/.npm
-python3 -m pip install jupyterlab jupyter-server-proxy jupyter-rsession-proxy
+python3 -m pip install jupyterlab
 
 # Add default user
 useradd -m -G staff,rstudio kozo2 
 echo "kozo2:$PASSWORD" | chpasswd
 
 # Allow user to write to RStudio DB
-chmod -R g+w /var/lib/rstudio-server
-chown -R :rstudio /var/lib/rstudio-server
+#chmod -R g+w /var/lib/rstudio-server
+#chown -R :rstudio /var/lib/rstudio-server
 
 # Remove s6 Rstudio service
-rm -rf /etc/services.d/rstudio
+#rm -rf /etc/services.d/rstudio
 
 # Create Jupyter configuration file
 cd /home/kozo2
