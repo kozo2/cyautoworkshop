@@ -34,3 +34,5 @@ chown -R kozo2:kozo2 /home/kozo2/$REPOSITORY
 
 # Copy README.md and adjust links for analyses paths
 cat /home/kozo2/$REPOSITORY/README.md | sed "s/(vignettes/($REPOSITORY\/vignettes/g" >> /home/kozo2/README.md
+
+cp /home/kozo2/$REPOSITORY/workshop.ipynb /home/kozo2/workshop.ipynb
