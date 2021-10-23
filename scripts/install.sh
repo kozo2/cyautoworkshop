@@ -36,3 +36,4 @@ chown -R kozo2:kozo2 /home/kozo2/$REPOSITORY
 cat /home/kozo2/$REPOSITORY/README.md | sed "s/(vignettes/($REPOSITORY\/vignettes/g" >> /home/kozo2/README.md
 
 cp /home/kozo2/$REPOSITORY/workshop.ipynb /home/kozo2/workshop.ipynb
+cp /home/kozo2/$REPOSITORY/workshop_ja.ipynb /home/kozo2/workshop_ja.ipynb
