@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - master
+      - remove-rstudio
 
 env:
   cache-version: v1
