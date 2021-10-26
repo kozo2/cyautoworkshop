@@ -15,7 +15,8 @@ echo "kozo2:$PASSWORD" | chpasswd
 #chown -R :rstudio /var/lib/rstudio-server
 
 # Remove s6 Rstudio service
-#rm -rf /etc/services.d/rstudio
+apt purge rstudio-server -y
+rm -rf /etc/services.d/rstudio
 
 # Create Jupyter configuration file
 cd /home/kozo2
