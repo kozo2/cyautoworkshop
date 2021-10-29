@@ -1,10 +1,10 @@
-## Pre-Workshop Instructions
+# Pre-Workshop Instructions
 
 Please perform the following steps *before the workshop*.
 These steps take a few minutes
 and you may have issues specific to your machine.
 
-### STEP 1: Install the latest Cytoscape into your Desktop environment(3.9.0)
+## STEP 1: Install the latest Cytoscape into your Desktop environment(3.9.0)
 - If you have Cytoscape installed before 3.9.0, please update it.
 - [Download Cytoscape](https://cytoscape.org/download.html).
 - Open and follow installation steps.
@@ -19,16 +19,18 @@ Mac users need to be careful about
 - A message like the above image will appear, so press the OK button to restart Cytoscape.
 - and keep Cytoscape up and running.
 
-### STEP 2: Install the RCy3 package in Google Colab
-- You will need Get Google Account
+## STEP 2: Install the RCy3 package in Google Colab
+- You will need to get a Google Account to use Colab
 - Open this Google Colab link
   - Simply run the following code cell
 
-```
-devtools::install_github("cytoscape/RCy3")
-```
+  ```
+  devtools::install_github("cytoscape/RCy3")
+  ```
+- It takes a few minutes for install_github to finish.
+  - Let's leave it alone and move onto the main workshop.
 
-## Cytoscape Automation Workshop
+# Main workshop
 
 ## Self-introduction
 
@@ -42,7 +44,7 @@ Kozo Nishida, RIKEN
 
 ![image](https://user-images.githubusercontent.com/12192/139426468-915e9a76-7e4e-4a37-aee9-3d0e344f551e.png)
 
-- Open source, cross platform, written in Java.
+- Open source, cross platform Java desktop GUI app.
 
 ### Core concepts
 
