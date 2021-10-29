@@ -28,8 +28,8 @@ How to set them up will be described later.
 
 #### Disclaimer
 Unlike other workshops, this workshop does not use [the Orchestra platform](http://app.orchestra.cancerdatasci.org/).
-This is because my notebook is doing a browser hack using Javascript.
-We considered making this work in Orchestra, but we couldn't make it happen by this workshop.
+This is because my notebook is doing a browser hack using JavaScript.
+Currently that JavaScript doesn't work in Orchestra.
 
 However, an Orchestra-style workshop environment is also available **as long as it is within your local environment** rather than the Orchestra.
 ```
@@ -37,10 +37,10 @@ docker run -d -p 8888:8888 kozo2/cyautoworkshop
 ```
 and visit http://localhost:8888 in your browser.
 
-
 ### Workshop Participation
 
-After the basic concepts of Cytoscape automation is introduced, students will be given the opportunity to reproduce more practical example workflow.
+After the basic concepts of Cytoscape automation is introduced,
+students will be given the opportunity to reproduce more practical example workflow.
 
 ### Bioconductor packages used
 
