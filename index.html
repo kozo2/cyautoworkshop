@@ -84,57 +84,71 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="buildabiocworkshop" class="section level1">
+<div id="cytoscape-automation-with-rcy3" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#buildabiocworkshop" class="anchor"></a>BuildABiocWorkshop</h1></div>
-<p>This package is a template for building a Bioconductor workshop. The package includes Github actions to:</p>
-<ol>
-<li>Set up bioconductor/bioconductor_docker:devel on Github resources</li>
-<li>Install package dependencies for your package (based on the <code>DESCRIPTION</code> file)</li>
-<li>Run <code><a href="http://r-lib.github.io/rcmdcheck/reference/rcmdcheck.html">rcmdcheck::rcmdcheck</a></code>
-</li>
-<li>Build a pkgdown website and push it to github pages</li>
-<li>Build a docker image with the installed package and dependencies</li>
-</ol>
-<div id="responsibilities" class="section level2">
+<a href="#cytoscape-automation-with-rcy3" class="anchor"></a>Cytoscape automation with RCy3</h1></div>
+<div id="instructor" class="section level2">
 <h2 class="hasAnchor">
-<a href="#responsibilities" class="anchor"></a>Responsibilities</h2>
-<p>This year, package authors will be primarily responsible for:</p>
-<ol>
-<li>Creating a landing site of their choosing for their workshops (a website). This website should be listed in the <code>DESCRIPTION</code> file as the <code>URL</code>.</li>
-<li>Creating a docker account and image that will contain workshop materials and the installed packages necessary to run those materials. The name of the resulting docker image, including “tag” if desired, should be listed in a non-standard tag, <code>DockerImage:</code> in the <code>DESCRIPTION</code> file.</li>
-</ol>
-<p>Both of those tasks can be accomplished using the Github actions included in this template package. The vignette accompanying this package describes how to accomplish both of these tasks.</p>
-</div>
-<div id="details" class="section level2">
-<h2 class="hasAnchor">
-<a href="#details" class="anchor"></a>Details</h2>
-<p>For detailed instructions, see the <code>How to build a workshop</code> article/vignette.</p>
-</div>
-<div id="results-of-successful-deployment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#results-of-successful-deployment" class="anchor"></a>Results of successful deployment</h2>
+<a href="#instructor" class="anchor"></a>Instructor</h2>
 <ul>
-<li>A working docker image that contains the installed package and dependencies.</li>
-<li>An up-to-date <code>pkgdown</code> website at <a href="https://YOURUSERNAME.github.io/YOURREPOSITORYNAME/" class="uri">https://YOURUSERNAME.github.io/YOURREPOSITORYNAME/</a>
-</li>
-<li>Docker image will be tagged with <code>latest</code>, <code>sha-XXXXXX</code> where <code>XXXXXX</code> is the hash of the current <code>master</code> commit, and <code>master</code>.</li>
+<li>Kozo Nishida (<a href="mailto:kozo.nishida@gmail.com" class="email">kozo.nishida@gmail.com</a>)</li>
 </ul>
 </div>
-<div id="to-use-the-resulting-image" class="section level2">
+<div id="workshop-description" class="section level2">
 <h2 class="hasAnchor">
-<a href="#to-use-the-resulting-image" class="anchor"></a>To use the resulting image:</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-e</span> PASSWORD=<span class="op">&lt;</span>choose_a_password_for_rstudio<span class="op">&gt;</span> -p 8787:8787 YOURDOCKERIMAGENAME</span></code></pre></div>
-<p>Once running, navigate to <a href="https://localhost:8787/" class="uri">https://localhost:8787/</a> and then login with <code>rstudio</code>:<code>yourchosenpassword</code>.</p>
-<p>To try with <strong>this</strong> repository docker image:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-e</span> PASSWORD=abc <span class="at">-p</span> 8787:8787 seandavi/buildabiocworkshop2020</span></code></pre></div>
-<p><em>NOTE</em>: Running docker that uses the password in plain text like above exposes the password to others in a multi-user system (like a shared workstation or compute node). In practice, consider using an environment variable instead of plain text to pass along passwords and other secrets in docker command lines.</p>
+<a href="#workshop-description" class="anchor"></a>Workshop Description</h2>
+<p>Cytoscape is a network visualization platform for biology. Recently, workflows using Cytoscape can be automatically executed in R and Python. This is important not only because it can be done automatically, but also because it allows you to take advantage of the rich data analysis packages of R or Python. In this workshop, I will explain the basic usage of automation and more practical usage.</p>
+<div id="prerequisites" class="section level3">
+<h3 class="hasAnchor">
+<a href="#prerequisites" class="anchor"></a>Prerequisites</h3>
+<ul>
+<li>Basic knowledge of Cytoscape</li>
+<li>Basic knowledge of R</li>
+<li>Basic understanding of the biological network database (STRING)</li>
+</ul>
+<p>Useful background reading</p>
+<ul>
+<li>The <a href="https://bioconductor.org/packages/release/bioc/html/RCy3.html">RCy3</a> vignettes.</li>
+</ul>
 </div>
-<div id="whatcha-get" class="section level2">
+<div id="preparation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#preparation" class="anchor"></a>Preparation</h3>
+<p>We have created a Jupyter Notebook that can be run on <a href="https://colab.research.google.com/">Google Colab</a> so that you can reproduce this workshop. You must have a Google account to access this. You also need to have <a href="https://cytoscape.org/download.html">the desktop version of Cytoscape</a> installed within your local desktop environment. After the Cytoscape installation is complete, you need to launch Cytoscape. And after you launch Cytoscape, you can run the notebook for this workshop.</p>
+<div id="disclaimer" class="section level4">
+<h4 class="hasAnchor">
+<a href="#disclaimer" class="anchor"></a>Disclaimer</h4>
+<p>Unlike other workshops, this workshop does not use <a href="http://app.orchestra.cancerdatasci.org/">the Orchestra platform</a>. This is because my notebook is doing a browser hack using Javascript. We considered making this work in Orchestra, but we couldn’t make it happen by this workshop.</p>
+<p>However, an Orchestra-style workshop environment is also available <strong>as long as it is within your local environment</strong> rather than the Orchestra.</p>
+<pre><code>docker run -d -p 8888:8888 kozo2/cyautoworkshop</code></pre>
+<p>and visit <a href="http://localhost:8888" class="uri">http://localhost:8888</a> in your browser.</p>
+</div>
+</div>
+<div id="workshop-participation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#workshop-participation" class="anchor"></a>Workshop Participation</h3>
+<p>After the basic concepts of Cytoscape automation is introduced, students will be given the opportunity to reproduce more practical example workflow.</p>
+</div>
+<div id="bioconductor-packages-used" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bioconductor-packages-used" class="anchor"></a>Bioconductor packages used</h3>
+<ul>
+<li>RCy3</li>
+</ul>
+<p>This repository provides biologically relevant analyses using the <a href="https://bioconductor.org/packages/RCy3/">RCy3</a> package.</p>
+</div>
+</div>
+<div id="workshop-goals-and-objectives" class="section level2">
 <h2 class="hasAnchor">
-<a href="#whatcha-get" class="anchor"></a>Whatcha get</h2>
-<p><a href="https://seandavi.github.io/BuildABiocWorkshop" class="uri">https://seandavi.github.io/BuildABiocWorkshop</a></p>
-<p><img src="https://github.com/seandavi/BuildABiocWorkshop/raw/master/inst/images/dockerhub_result.png" alt="dockerhub"></p>
+<a href="#workshop-goals-and-objectives" class="anchor"></a>Workshop goals and objectives</h2>
+<div id="learning-goals" class="section level3">
+<h3 class="hasAnchor">
+<a href="#learning-goals" class="anchor"></a>Learning goals</h3>
+</div>
+<div id="learning-objectives" class="section level3">
+<h3 class="hasAnchor">
+<a href="#learning-objectives" class="anchor"></a>Learning objectives</h3>
+</div>
 </div>
 </div>
   </div>
