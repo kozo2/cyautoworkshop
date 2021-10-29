@@ -2,7 +2,7 @@
 
 Please perform the following steps *before the workshop*.
 These steps take a few minutes
-and you may have issues specific to your machine that we can address in advance.
+and you may have issues specific to your machine.
 
 ### STEP 1: Install the latest Cytoscape in your Desktop environment(3.9.0)
 - [Download Cytoscape](https://cytoscape.org/download.html)
