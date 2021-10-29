@@ -19,7 +19,7 @@ In this workshop, I will explain the basic usage of Cytoscape automation and mor
 
 Useful background reading
 
-- The [RCy3](https://bioconductor.org/packages/release/bioc/html/RCy3.html) vignettes.
+- The [RCy3](https://bioconductor.org/packages/release/bioc/html/RCy3.html) Bioconductor package vignettes.
 
 ### Preparation
 
