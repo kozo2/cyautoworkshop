@@ -1,6 +1,6 @@
 ## Pre-Workshop Instructions
 
-Please perform the following steps before the workshop.
+Please perform the following steps *before the workshop*.
 These steps take a few minutes
 and you may have issues specific to your machine that we can address in advance.
 
