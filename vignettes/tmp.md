@@ -17,6 +17,7 @@ Mac users need to be careful about
 ![image](https://user-images.githubusercontent.com/12192/139441980-5d73579f-39dd-45da-916b-759eff99474d.png)
 
 - A message like the above image will appear, so press the OK button to restart Cytoscape.
+- and keep Cytoscape up and running.
 
 ### STEP 2: Install the RCy3 package in Google Colab
 - You will need Get Google Account
