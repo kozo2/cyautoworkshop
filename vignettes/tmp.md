@@ -4,9 +4,10 @@ Please perform the following steps *before the workshop*.
 These steps take a few minutes
 and you may have issues specific to your machine.
 
-### STEP 1: Install the latest Cytoscape in your Desktop environment(3.9.0)
-- [Download Cytoscape](https://cytoscape.org/download.html)
-- Open and follow installation steps
+### STEP 1: Install the latest Cytoscape into your Desktop environment(3.9.0)
+- If you have Cytoscape installed before 3.9.0, please update it.
+- [Download Cytoscape](https://cytoscape.org/download.html).
+- Open and follow installation steps.
 
 Mac users need to be careful about
 ![image](https://user-images.githubusercontent.com/12192/139439069-dba3e46a-8fe2-414c-98fe-55d02ba39e32.png)
