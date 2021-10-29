@@ -10,7 +10,7 @@ Cytoscape is a network visualization platform.
 Recently, workflows using Cytoscape can be automatically executed from R or Python.
 This is important not only because it can be done automatically,
 but also because it allows you to take advantage of the rich data analysis packages of R or Python.
-In this workshop, I will explain the basic usage of automation and more practical usage.
+In this workshop, I will explain the basic usage of Cytoscape automation and more practical usage.
 
 ### Prerequisites
 
