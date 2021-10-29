@@ -35,32 +35,27 @@ Unlike other workshops, this workshop does not use [the Orchestra platform](http
 This is because my notebook is doing a browser hack using Javascript.
 We considered making this work in Orchestra, but we couldn't make it happen by this workshop.
 
+However, an Orchestra-style workshop environment is also available **as long as it is within your local environment** rather than the Orchestra.
+```
+docker run -d -p 8888:8888 kozo2/cyautoworkshop
+```
+and visit http://localhost:8888 in your browser.
+
+
 ### Workshop Participation
 
-Bioconductor packages used
+After the basic concepts of Cytoscape automation is introduced, students will be given the opportunity to reproduce more practical example workflow.
 
+### Bioconductor packages used
+
+- RCy3
 
 This repository provides biologically relevant analyses using the [RCy3](https://bioconductor.org/packages/RCy3/) package.
-You can run R analyses locally in the provided Docker container, or on the Cloud for free.
 
-## Running on the Cloud for free
+## Workshop goals and objectives
 
-A machine with all dependencies, code from this repository, and Jupyterlab (with R) is available at http://app.orchestra.cancerdatasci.org/ (search for the Cytoscape). You can use these machines for up to 8 hours at a time.
+### Learning goals
 
-## Running locally using Docker
+### Learning objectives
 
-### Requirements
 
-You need [Docker](https://docs.docker.com/get-docker/).
-
-### Getting Started
-
-First pull the image:
-
-    docker pull kozo2/cyautoworkshop
-
-Then run a container based on the image:
-
-    docker run -d -p 8888:8888 kozo2/cyautoworkshop
-
-Visit http://localhost:8888 in your browser.
