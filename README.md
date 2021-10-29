@@ -17,10 +17,6 @@ In this workshop, I will explain the basic usage of Cytoscape automation and mor
 - Basic knowledge of network and biology
 - Basic knowledge of R
 
-Useful background reading
-
-- The [RCy3](https://bioconductor.org/packages/release/bioc/html/RCy3.html) Bioconductor package vignettes.
-
 ### Preparation
 
 We have created a Jupyter Notebook that can be run on [Google Colab](https://colab.research.google.com/) so that you can reproduce this workshop.
