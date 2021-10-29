@@ -1,6 +1,34 @@
+## Pre-Workshop Instructions
+
+Please perform the following steps before the workshop.
+These steps take a few minutes
+and you may have issues specific to your machine that we can address in advance.
+
+### STEP 1: Install the latest Cytoscape in your Desktop environment(3.9.0)
+- [Download Cytoscape](https://cytoscape.org/download.html)
+- Open and follow installation steps
+
+Mac users need to be careful about
+![image](https://user-images.githubusercontent.com/12192/139439069-dba3e46a-8fe2-414c-98fe-55d02ba39e32.png)
+
+- Launch Cytoscape 3.9.0 from start menu or Desktop shortcut
+
+![image](https://user-images.githubusercontent.com/12192/139441980-5d73579f-39dd-45da-916b-759eff99474d.png)
+
+- A message like the above image will appear, so press the OK button to restart Cytoscape.
+
+### STEP 2: Install the RCy3 package in Google Colab
+- You will need Get Google Account
+- Open this Google Colab link
+  - Simply run the following code cell
+
+```
+devtools::install_github("cytoscape/RCy3")
+```
+
 ## Cytoscape Automation Workshop
 
-### Introductions
+## Self-introduction
 
 Kozo Nishida, RIKEN
 - A member of Bioconductor community advisory board
@@ -10,10 +38,22 @@ Kozo Nishida, RIKEN
 
 ## What is Cytoscape?
 
-![image](https://user-images.githubusercontent.com/12192/139395948-a00a68f1-64c4-4dbd-b33e-a7258a4b2e4e.png)
+![image](https://user-images.githubusercontent.com/12192/139426468-915e9a76-7e4e-4a37-aee9-3d0e344f551e.png)
 
-- Network nodes and edges have annotation tables.
-- Color, shape, size, or ... according to the annotation table can be mapped to nodes and edges.
+- Open source, cross platform, written in Java.
+
+### Core concepts
+
+**Networks and Tables**: Network nodes and edges have annotation tables.
+
+![image](https://user-images.githubusercontent.com/12192/139427094-bfd9a839-dabf-468d-8f28-6458443c8e61.png)
+
+![image](https://user-images.githubusercontent.com/12192/139427149-4f0fe568-3851-4de6-834e-2e809e85f1be.png)
+
+Color, shape, size, or ... according to the annotation table can be mapped to nodes and edges.
+
+
+
 - The main usage was to manually execute the workflow with the GUI.
 - Recently, automating Cytoscape operations from notebooks that describe workflows from R or Python has become more popular.
 
@@ -42,3 +82,8 @@ Why run a script when I could just use Cytoscape directly?
 
 [RCy3: Network biology using Cytoscape from within R. F1000Research 2019.](https://f1000research.com/articles/8-1774)
 
+## Translating biological data into Cytoscape using RCy3
+
+Networks offer us a useful way to represent our biological data. But how do we seamlessly translate our data from R into Cytoscape?
+
+![image](https://user-images.githubusercontent.com/12192/139404069-536a67a2-e8fe-4072-bc42-74bfb060f924.png)
