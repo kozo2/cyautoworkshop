@@ -19,11 +19,12 @@ In this workshop, I will explain the basic usage of Cytoscape automation and mor
 
 ### Preparation
 
-We have created a Jupyter Notebook that can be run on [Google Colab](https://colab.research.google.com/) so that you can reproduce this workshop.
+You need to use [Google Colab](https://colab.research.google.com/) to run and reproduce the workshop material.
 You must have a Google account to access this.
-You also need to have [the desktop version of Cytoscape](https://cytoscape.org/download.html) installed within your local desktop environment.
-After the Cytoscape installation is complete, you need to launch Cytoscape.
-And after you launch Cytoscape, you can run the notebook for this workshop.
+You also need to use [Cytoscape](https://cytoscape.org/download.html) in your local desktop environment in addition to Google Colab.
+Unlike other workshops, this workshop cannot be run only in a remote environment.
+You need to use a combination of remote Google Colab and local Cytoscape.
+How to set them up will be described later.
 
 #### Disclaimer
 Unlike other workshops, this workshop does not use [the Orchestra platform](http://app.orchestra.cancerdatasci.org/).
