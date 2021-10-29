@@ -14,7 +14,7 @@ In this workshop, I will explain the basic usage of Cytoscape automation and mor
 
 ### Prerequisites
 
-- Basic knowledge of Cytoscape
+- Basic knowledge of network and biology
 - Basic knowledge of R
 - Basic understanding of the biological network database (STRING)
 
