@@ -34,8 +34,8 @@ Mac users need to be careful about
 
 ## Self-introduction
 
-Kozo Nishida, RIKEN
-- A member of Bioconductor community advisory board
+Kozo Nishida, RIKEN, Japan
+- A member of Bioconductor Community Advisory Board (CAB)
 - Author of a Bioconductor package based on RCy3 (transomics2cytoscape)
 - Cytoscape community contributor (Google Summer of Code, Google Season of Docs)
 - Author of KEGGscape Cytoscape App
@@ -45,6 +45,7 @@ Kozo Nishida, RIKEN
 ![image](https://user-images.githubusercontent.com/12192/139426468-915e9a76-7e4e-4a37-aee9-3d0e344f551e.png)
 
 - Open source, cross platform Java desktop GUI app.
+- for network visualization.
 
 ### Core concepts
 
@@ -56,12 +57,21 @@ Kozo Nishida, RIKEN
 
 Color, shape, size, or ... according to the annotation table can be mapped to nodes and edges.
 
+## Why do we need to automate?
+Why automate Cytoscape when I could just use the GUI directly?
 
+- For things you want to do multiple times, e.g., loops
+- For things you want to repeat in the future
+- For things you want to share with colleagues or publish
+- For things you are already working on in R or Python, etc
+  - To prepare data for collaborators
+
+In short, for "reproducibility", "data sharing", "the use of R or Python".
+
+## How can Cytoscape operations be automated?
 
 - The main usage was to manually execute the workflow with the GUI.
 - Recently, automating Cytoscape operations from notebooks that describe workflows from R or Python has become more popular.
-
-## How can Cytoscape operations be automated?
 
 ![image](https://user-images.githubusercontent.com/12192/139397677-80076550-e458-4bd4-9ab5-ba48ef6843b9.png)
 
@@ -70,15 +80,6 @@ Color, shape, size, or ... according to the annotation table can be mapped to no
 - However, since table operations are essential, it is convenient to be able to operate them with R or Python.
   - RCy3 or py4cytoscape
   - py4cytoscape is Python clone of RCy3
-
-## Why do we need to automate?
-Why run a script when I could just use Cytoscape directly?
-
-- For things you want to do multiple times, e.g., loops
-- For things you want to repeat in the future
-- For things you want to share with colleagues or publish
-- For things you are already working on in R or Python, etc
-  - To prepare data for collaborators
 
 ## Automation with RCy3
 
