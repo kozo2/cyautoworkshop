@@ -68,15 +68,14 @@ Why automate Cytoscape when I could just use the GUI directly?
 
 In short, for "reproducibility", "data sharing", "the use of R or Python".
 
-## How can Cytoscape operations be automated?
+## How can Cytoscape GUI operations be automated?
 
 ![image](https://user-images.githubusercontent.com/12192/139397677-80076550-e458-4bd4-9ab5-ba48ef6843b9.png)
 
-- Cytoscape has built-in command system like shell commands (for operating Cytoscape).
-  - They are also provided as REST APIs.
-- However, since table operations are essential, it is convenient to be able to operate them with R or Python.
-  - RCy3 or py4cytoscape
+- Cytoscape now has REST API for almost every GUI operation.
+  - RCy3 or py4cytoscape is R or Python wrapper of the REST API
   - py4cytoscape is Python clone of RCy3
+- Since table operations are essential for Bioinformatics, it is convenient to be able to operate them with R[dplyr] or Python[pandas].
 
 ## Automation with RCy3
 
