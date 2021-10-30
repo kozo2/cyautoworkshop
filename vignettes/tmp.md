@@ -186,3 +186,9 @@ Initial simple network
 ![image](https://user-images.githubusercontent.com/12192/139537190-1f79f871-5dbd-4779-9a4f-7c67f263101b.png)
 
 # Main workshop (more practical)
+
+## Example Use Cases
+
+1. **Omics data** - I have a ----------- fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?
+2. **Coexpression data** - I have a dataset that represents relationships. How do I represent it as a network.
+3. **Omics data** - I have a -----------fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. I have run my data through a functional enrichment tool and now have a set of enriched terms associated with my dataset. How do I represent my functional enrichments as a network?
