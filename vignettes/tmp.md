@@ -244,3 +244,15 @@ head(top_mesenchymal_genes)
 ```
 
 We are going to query the String Database to get all interactions found for our set of top Mesenchymal genes.
+
+### Cytoscape Apps with network data
+Thankfully we don't have to query each independently.
+In addition to many specialized (for example, for specific molecules, interaction type, or species) interaction databases there are also databases that collate these databases to create a broad resource that is easier to use. For example:
+
+- [stringApp](https://apps.cytoscape.org/apps/stringapp) - is a protein-protein and protein-chemical database that imports data from [String(Szklarczyk et al.)](https://doi.org/10.1093/nar/gkaa1074), [STITCH] into a unified, queriable database.
+
+You can install apps in Cytoscape directly from R.
+
+```{r}
+installApp("stringApp")
+```
