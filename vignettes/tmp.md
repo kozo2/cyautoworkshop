@@ -140,9 +140,8 @@ this workshop is exceptionally using Google Colab instead of Orchestra.
 If you have RCy3 installed locally instead of remotely like Google Colab,
 you don't need to use this Jupyter Bridge technology.
 
-### Why use Jupyter Bridge
+### (Then) Why use Jupyter Bridge?
 
 - Users do not need to worry about dependencies and environment.
 - Easily share notebook-based workflows and data sets
 - Workflows can reside in the cloud, access cloud resources, and yet still use Cytoscape features.
-
