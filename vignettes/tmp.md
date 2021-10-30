@@ -72,10 +72,22 @@ In short, for "reproducibility", "data sharing", "the use of R or Python".
 
 ![image](https://user-images.githubusercontent.com/12192/139397677-80076550-e458-4bd4-9ab5-ba48ef6843b9.png)
 
-- Cytoscape now has REST API for almost every GUI operation.
+- Cytoscape makes that possible with the REST API.
+- Today Cytoscape is not only a Desktop application but also a REST server.
+- You can check if Cytoscape is now working as a server with the command below.
+
+  ```
+  curl localhost:1234
+  ```
+
+- Now Cytoscape has REST API for almost every GUI operation.
   - RCy3 or py4cytoscape is R or Python wrapper of the REST API
-  - py4cytoscape is Python clone of RCy3
+  - py4cytoscape is Python clone of RCy3, py4cytoscape has same function specifications with RCy3
 - Since table operations are essential for Bioinformatics, it is convenient to be able to operate them with R[dplyr] or Python[pandas].
+
+[CyREST: Turbocharging Cytoscape Access for External Tools via a RESTful API. F1000Research 2015.](https://dx.doi.org/10.12688%2Ff1000research.6767.1)
+
+[Cytoscape Automation: empowering workflow-based network analysis. Genome Biology 2019.](https://doi.org/10.1186/s13059-019-1758-4)
 
 ## Automation with RCy3
 
