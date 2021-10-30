@@ -8,6 +8,7 @@ and you may have issues specific to your machine.
 - If you have Cytoscape installed before 3.9.0, please update it.
 - [Download Cytoscape](https://cytoscape.org/download.html).
 - Open and follow installation steps.
+  - If you don't have Java in your environment, Cytoscape will ask you if you want to download it. Please accept it and download Java.
 
 Mac users need to be careful about
 ![image](https://user-images.githubusercontent.com/12192/139439069-dba3e46a-8fe2-414c-98fe-55d02ba39e32.png)
