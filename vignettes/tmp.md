@@ -32,7 +32,7 @@ Mac users need to be careful about
 - It takes a few minutes for install_github to finish.
   - Let's leave it alone and move onto the main workshop.
 
-# Main workshop
+# Main workshop (primer)
 
 ## Self-introduction
 
@@ -185,4 +185,4 @@ Initial simple network
 
 ![image](https://user-images.githubusercontent.com/12192/139537190-1f79f871-5dbd-4779-9a4f-7c67f263101b.png)
 
-
+# Main workshop (more practical)
