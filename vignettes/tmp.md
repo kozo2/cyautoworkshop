@@ -162,12 +162,27 @@ edges <- data.frame(source=c("node 0","node 0","node 0","node 2"),
     stringsAsFactors=FALSE)
 ```
 
-Data frame used to create Network
+#### Data frame used to create Network
 
 ![image](https://user-images.githubusercontent.com/12192/139534280-0c569dfd-d66d-4054-9b58-becce79225bc.png)
 
-Create Network
+#### Create Network
 
 ```{r}
 createNetworkFromDataFrames(nodes, edges, title="my first network", collection="DataFrame Example")
 ```
+
+#### Export an image of the network
+
+Remember.
+All networks we make are created in Cytoscape so get an image of the resulting network and include it in your current analysis if desired.
+
+```{r}
+exportImage("my_first_network", type = "png")
+```
+
+Initial simple network
+
+![image](https://user-images.githubusercontent.com/12192/139537190-1f79f871-5dbd-4779-9a4f-7c67f263101b.png)
+
+
