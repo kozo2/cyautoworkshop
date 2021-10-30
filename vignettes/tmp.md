@@ -349,3 +349,8 @@ To import our expression data we will match our dataset to the â€œdisplay nameâ€
 ```{r}
 loadTableData(RNASeq_gene_scores, table.key.column = "display name", data.key.column = "Name")  #default data.frame key is row.names
 ```
+
+## Visual Style
+
+Modify the visual style Create your own visual style to visualize your expression data on the String network.
+Start with a default style
