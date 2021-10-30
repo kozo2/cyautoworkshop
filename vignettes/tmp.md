@@ -128,11 +128,11 @@ IRdisplay::display_javascript(browserClientJs)
 ```
 
 We used a technology called **Jupyter Bridge** in the above code.
-Jupyter Bridge is a JavaScript implementation that makes HTTP requests from remote a REST client looks like local requests.
+Jupyter Bridge is a JavaScript implementation that makes HTTP requests from a remote REST client look like local requests.
 
 ![image](https://user-images.githubusercontent.com/12192/139530994-8afd99b2-1175-46b3-9ad7-166d8ba78f2a.png)
 
-Since it is difficult to access Cytoscape in the desktop environment from a remote environment, we use such technology.
+Since it is difficult to access Cytoscape in the desktop environment from a remote environment, we use Jupyter Bridge.
 
 And since I couldn't get Jupyter Bridge to work in the Orchestra environment,
 this workshop is exceptionally using Google Colab instead of Orchestra.
