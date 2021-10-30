@@ -256,3 +256,27 @@ You can install apps in Cytoscape directly from R.
 ```{r}
 installApp("stringApp")
 ```
+
+### Help on specific cytoscape command
+To get information about an individual command from the R environment you can also use the commandsHelp function.
+Simply specify what command you would like to get information on by adding its name to the command.
+For example “commandsHelp("help string”)“
+
+```{r}
+commandsHelp("help string")
+```
+
+```{r}
+commandsHelp("help string protein query")
+```
+
+```{r}
+mesen_string_interaction_cmd <- paste('string protein query taxonID=9606 limit=150 cutoff=0.9 query="',paste(top_mesenchymal_genes$Name, collapse=","),'"',sep="")
+commandsGET(mesen_string_interaction_cmd)
+```
+
+```{r}
+exportImage("initial_string_network", type = "png")
+```
+
+![initial_string_network](https://user-images.githubusercontent.com/12192/139543384-b19ac0f3-1dc9-4e6d-a212-af4f19ab6529.png)
