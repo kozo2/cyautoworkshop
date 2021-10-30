@@ -134,7 +134,7 @@ Jupyter Bridge is a JavaScript implementation that makes HTTP requests from remo
 
 Since it is difficult to access Cytoscape in the desktop environment from a remote environment, we use such technology.
 
-And since I couldn't get this technology to work in the Orchestra environment,
+And since I couldn't get Jupyter Bridge to work in the Orchestra environment,
 this workshop is exceptionally using Google Colab instead of Orchestra.
 
 If you have RCy3 installed locally instead of remotely like Google Colab,
