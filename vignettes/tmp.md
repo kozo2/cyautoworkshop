@@ -280,3 +280,72 @@ exportImage("initial_string_network", type = "png")
 ```
 
 ![initial_string_network](https://user-images.githubusercontent.com/12192/139543384-b19ac0f3-1dc9-4e6d-a212-af4f19ab6529.png)
+
+### Layouts
+Layout the network
+
+```{r}
+layoutNetwork('force-directed')
+```
+
+Check what other layout algorithms are available to try out
+
+```{r}
+getLayoutNames()
+```
+
+### Layouts - cont'd
+
+Get the parameters for a specific layout
+
+```{r}
+getLayoutPropertyNames(layout.name='force-directed')
+```
+
+Re-layout the network using the force directed layout but specify some of the parameters
+
+```{r}
+layoutNetwork('force-directed defaultSpringCoefficient=0.0000008 defaultSpringLength=70')
+```
+
+Get a screenshot of the re-laid out network
+
+```{r}
+response <- exportImage("relayout_string_network", type = "png")
+```
+
+```{r}
+response
+```
+
+String network with new layout
+![relayout_string_network](https://user-images.githubusercontent.com/12192/139554068-55353d6a-62e2-4956-b2c6-cda4cc5a28d8.png)
+
+## Overlay our expression data on the String network.
+
+To do this we will be using the loadTableData function from RCy3.
+It is important to make sure that that your identifiers types match up.
+You can check what is used by String by pulling in the column names of the node attribute table.
+
+```{r}
+getTableColumnNames('node')
+```
+
+## Overlay our expression data on the String network - cont'd
+
+If you are unsure of what each column is and want to further verify the column to use you can also pull in the entire node attribute table.
+
+```{r}
+node_attribute_table_topmesen <- getTableColumns(table="node")
+head(node_attribute_table_topmesen[,3:7])
+```
+
+![image](https://user-images.githubusercontent.com/12192/139554236-dc19aaf7-8186-40f0-9ed3-d50a46c64d27.png)
+
+The column “display name” contains HGNC gene names which are also found in our Ovarian Cancer dataset.
+
+To import our expression data we will match our dataset to the “display name” node attribute.
+
+```{r}
+loadTableData(RNASeq_gene_scores, table.key.column = "display name", data.key.column = "Name")  #default data.frame key is row.names
+```
