@@ -107,6 +107,8 @@ From here it finally becomes hands-on using Google Colab.
 Aside from the details, let's connect Google Colab to local Cytoscape.
 
 Make sure your local Cytoscape is fully up and running before running the code below.
+It will take some time for Cytoscape to start up and its REST server to start up completely.
+(Please wait for about 10 seconds.)
 
 ```{r}
 library(RCy3)
@@ -114,3 +116,16 @@ browserClientJs <- getBrowserClientJs()
 IRdisplay::display_javascript(browserClientJs)
 cytoscapePing()
 ```
+
+### Why was the remote Google Colab able to communicate with the local Cytoscape REST service?
+
+We used a technology called **Jupyter Bridge** in the code below.
+```
+browserClientJs <- getBrowserClientJs()
+IRdisplay::display_javascript(browserClientJs)
+```
+
+Jupyter Bridge is a JavaScript implementation that makes HTTP requests from remote REST clients look like local requests.
+
+![image](https://user-images.githubusercontent.com/12192/139530994-8afd99b2-1175-46b3-9ad7-166d8ba78f2a.png)
+
