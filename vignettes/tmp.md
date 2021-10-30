@@ -20,9 +20,10 @@ Mac users need to be careful about
 - A message like the above image will appear, so press the OK button to restart Cytoscape.
 - and keep Cytoscape up and running.
 
-## STEP 2: Install the RCy3 package in Google Colab
+## STEP 2: Install Google Chrome and the RCy3 package in Google Colab
 - You will need to get a Google Account to use Colab
-- Open this Google Colab link
+- You will need to install Google Chrome. Our Notebook does not work with Safari. Firefox may work, but I haven't confirmed it.
+- Open this Google Colab link in Chrome while logged in to Google.
   - Simply run the following code cell
 
   ```
