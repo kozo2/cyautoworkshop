@@ -193,10 +193,54 @@ Initial simple network
 2. **Coexpression data** - I have a dataset that represents relationships. How do I represent it as a network.
 3. **Omics data** - I have a -----------fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. I have run my data through a functional enrichment tool and now have a set of enriched terms associated with my dataset. How do I represent my functional enrichments as a network?
 
-## Realistic data
+## Example Data Set
+
+We downloaded gene expression data from the Ovarian Serous Cystadenocarcinoma project of The Cancer Genome Atlas (TCGA)(International Genome et al.),
+http://cancergenome.nih.gov via the Genomic Data Commons (GDC) portal(Grossman et al.) on 2017-06-14 using [TCGABiolinks Bioconductor package(Colaprico et al.)](http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html).
+
+- 300 samples available as RNA-seq data
+- 79 classified as Immunoreactive, 72 classified as Mesenchymal, 69 classified as Differentiated, and 80 classified as Proliferative samples
+- RNA-seq read counts were converted to CPM values and genes with CPM > 1 in at least 50 of the samples are retained for further study
+- The data was normalized and differential expression was calculated for each cancer class relative to the rest of the samples.
 
 There are two data files:
 
 1. [Expression matrix](https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt) - containing the normalized expression for each gene across all 300 samples.
 2. [Gene ranks](https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt) - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)
 
+```{r}
+library(RCurl)
+matrix <- getURL("https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt")
+RNASeq_expression_matrix <- read.table(text=matrix, header = TRUE, sep = "\t", quote="\"", stringsAsFactors = FALSE)
+```
+
+```{r}
+RNASeq_expression_matrix
+```
+
+```{r}
+matrix <- getURL("https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt")
+RNASeq_gene_scores <- read.table(text=matrix, header = TRUE, sep = "\t", quote="\"", stringsAsFactors = FALSE)
+```
+
+```{r}
+RNASeq_gene_scores
+```
+
+## Use Case - How are my top genes related?
+
+Omics data - I have a -----------fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset.
+I have normalized and scored my data. How do I overlay my data on existing interaction data?
+
+There are endless amounts of databases storing interaction data.
+
+![image](https://user-images.githubusercontent.com/12192/139541346-9e223e88-e6df-4e4d-b7f2-a5836f6e97eb.png)
+
+Get a subset of genes of interest from our scored data:
+
+```{r}
+top_mesenchymal_genes <- RNASeq_gene_scores[which(RNASeq_gene_scores$FDR.mesen < 0.05 & RNASeq_gene_scores$logFC.mesen > 2),]
+head(top_mesenchymal_genes)
+```
+
+We are going to query the String Database to get all interactions found for our set of top Mesenchymal genes.
