@@ -165,3 +165,9 @@ edges <- data.frame(source=c("node 0","node 0","node 0","node 2"),
 Data frame used to create Network
 
 ![image](https://user-images.githubusercontent.com/12192/139534280-0c569dfd-d66d-4054-9b58-becce79225bc.png)
+
+Create Network
+
+```{r}
+createNetworkFromDataFrames(nodes, edges, title="my first network", collection="DataFrame Example")
+```
