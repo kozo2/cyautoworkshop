@@ -97,7 +97,7 @@ In short, for "reproducibility", "data sharing", "the use of R or Python".
 
 [RCy3: Network biology using Cytoscape from within R. F1000Research 2019.](https://f1000research.com/articles/8-1774)
 
-## Translating R data into Cytoscape network using RCy3
+## Translating R data into a Cytoscape network using RCy3
 
 Networks offer us a useful way to represent our biological data.
 But how do we seamlessly translate our data from R into Cytoscape?
@@ -145,3 +145,23 @@ you don't need to use this Jupyter Bridge technology.
 - Users do not need to worry about dependencies and environment.
 - Easily share notebook-based workflows and data sets
 - Workflows can reside in the cloud, access cloud resources, and yet still use Cytoscape features.
+
+### Let's go back to how to translate R data into a Cytoscape network...
+
+Create a Cytoscape network from some basic R objects
+
+```{r}
+nodes <- data.frame(id=c("node 0","node 1","node 2","node 3"),
+    group=c("A","A","B","B"), # categorical strings
+    score=as.integer(c(20,10,15,5)), # integers
+    stringsAsFactors=FALSE)
+edges <- data.frame(source=c("node 0","node 0","node 0","node 2"),
+    target=c("node 1","node 2","node 3","node 3"),
+    interaction=c("inhibits","interacts","activates","interacts"),  # optional
+    weight=c(5.1,3.0,5.2,9.9), # numeric
+    stringsAsFactors=FALSE)
+```
+
+Data frame used to create Network
+
+![image](https://user-images.githubusercontent.com/12192/139534280-0c569dfd-d66d-4054-9b58-becce79225bc.png)
