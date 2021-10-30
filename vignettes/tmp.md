@@ -105,3 +105,11 @@ But how do we seamlessly translate our data from R into Cytoscape?
 From here it finally becomes hands-on using Google Colab.
 Aside from the details, let's connect Google Colab to local Cytoscape.
 
+Make sure your local Cytoscape is fully up and running before running the code below.
+
+```{r}
+library(RCy3)
+browserClientJs <- getBrowserClientJs()
+IRdisplay::display_javascript(browserClientJs)
+cytoscapePing()
+```
