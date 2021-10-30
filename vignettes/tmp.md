@@ -354,3 +354,8 @@ loadTableData(RNASeq_gene_scores, table.key.column = "display name", data.key.co
 
 Modify the visual style Create your own visual style to visualize your expression data on the String network.
 Start with a default style
+
+**Formatted String network**
+
+![mesen_string_network](https://user-images.githubusercontent.com/12192/139555494-3d46d339-153d-4c93-bf06-c393375ba2be.png)
+
