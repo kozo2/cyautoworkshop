@@ -120,13 +120,29 @@ cytoscapePing()
 
 ### Why was the remote Google Colab able to communicate with the local Cytoscape REST service?
 
-We used a technology called **Jupyter Bridge** in the code below.
+We need a detailed description of what happened in
+
 ```
 browserClientJs <- getBrowserClientJs()
 IRdisplay::display_javascript(browserClientJs)
 ```
 
+We used a technology called **Jupyter Bridge** in the above code.
 Jupyter Bridge is a JavaScript implementation that makes HTTP requests from remote REST clients look like local requests.
 
 ![image](https://user-images.githubusercontent.com/12192/139530994-8afd99b2-1175-46b3-9ad7-166d8ba78f2a.png)
+
+Since it is difficult to access Cytoscape in the desktop environment from a remote environment, we use such technology.
+
+And since I couldn't get this technology to work in the Orchestra environment,
+this workshop is exceptionally using Google Colab instead of Orchestra.
+
+If you have RCy3 installed locally instead of remotely like Google Colab,
+you don't need to use this Jupyter Bridge technology.
+
+### Why use Jupyter Bridge
+
+- Users do not need to worry about dependencies and environment.
+- Easily share notebook-based workflows and data sets
+- Workflows can reside in the cloud, access cloud resources, and yet still use Cytoscape features.
 
