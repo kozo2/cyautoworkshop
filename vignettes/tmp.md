@@ -70,9 +70,6 @@ In short, for "reproducibility", "data sharing", "the use of R or Python".
 
 ## How can Cytoscape operations be automated?
 
-- The main usage was to manually execute the workflow with the GUI.
-- Recently, automating Cytoscape operations from notebooks that describe workflows from R or Python has become more popular.
-
 ![image](https://user-images.githubusercontent.com/12192/139397677-80076550-e458-4bd4-9ab5-ba48ef6843b9.png)
 
 - Cytoscape has built-in command system like shell commands (for operating Cytoscape).
