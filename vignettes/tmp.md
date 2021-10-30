@@ -95,8 +95,13 @@ In short, for "reproducibility", "data sharing", "the use of R or Python".
 
 [RCy3: Network biology using Cytoscape from within R. F1000Research 2019.](https://f1000research.com/articles/8-1774)
 
-## Translating biological data into Cytoscape using RCy3
+## Translating R data into Cytoscape network using RCy3
 
-Networks offer us a useful way to represent our biological data. But how do we seamlessly translate our data from R into Cytoscape?
+Networks offer us a useful way to represent our biological data.
+But how do we seamlessly translate our data from R into Cytoscape?
 
 ![image](https://user-images.githubusercontent.com/12192/139404069-536a67a2-e8fe-4072-bc42-74bfb060f924.png)
+
+From here it finally becomes hands-on using Google Colab.
+Aside from the details, let's connect Google Colab to local Cytoscape.
+
