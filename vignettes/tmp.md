@@ -192,3 +192,11 @@ Initial simple network
 1. **Omics data** - I have a ----------- fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?
 2. **Coexpression data** - I have a dataset that represents relationships. How do I represent it as a network.
 3. **Omics data** - I have a -----------fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. I have run my data through a functional enrichment tool and now have a set of enriched terms associated with my dataset. How do I represent my functional enrichments as a network?
+
+## Realistic data
+
+There are two data files:
+
+1. [Expression matrix](https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt) - containing the normalized expression for each gene across all 300 samples.
+2. [Gene ranks](https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt) - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)
+
