@@ -227,9 +227,6 @@ head(top_mesenchymal_genes)
 
 ## Use Case - How are my top genes related?
 
-Omics data - I have a -----------fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset.
-I have normalized and scored my data. How do I overlay my data on existing interaction data?
-
 There are endless amounts of databases storing interaction data.
 
 ![image](https://user-images.githubusercontent.com/12192/139541346-9e223e88-e6df-4e4d-b7f2-a5836f6e97eb.png)
