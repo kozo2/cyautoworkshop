@@ -3,8 +3,8 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   cyautoworkshop: cyautoworkshop.html
-last_built: 2021-10-31T02:22Z
+last_built: 2021-10-31T02:43Z
 urls:
-  reference: https://seandavi.github.io/BuildABiocWorkshop/reference
-  article: https://seandavi.github.io/BuildABiocWorkshop/articles
+  reference: https://kozo2.github.io/cyautoworkshop/reference
+  article: https://kozo2.github.io/cyautoworkshop/articles
 
