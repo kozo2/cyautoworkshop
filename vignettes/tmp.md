@@ -273,6 +273,8 @@ mesen_string_interaction_cmd <- paste('string protein query taxonID=9606 limit=1
 commandsGET(mesen_string_interaction_cmd)
 ```
 
+Please see https://string-db.org/help/api/ for details.
+
 ```{r}
 exportImage("initial_string_network", type = "png")
 ```
