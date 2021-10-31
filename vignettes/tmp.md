@@ -204,22 +204,12 @@ http://cancergenome.nih.gov via the Genomic Data Commons (GDC) portal(Grossman e
 - RNA-seq read counts were converted to CPM values and genes with CPM > 1 in at least 50 of the samples are retained for further study
 - The data was normalized and differential expression was calculated for each cancer class relative to the rest of the samples.
 
-There are two data files:
+We will use the following table as a result of the analysis to integrate it into a interaction network:
 
-1. [Expression matrix](https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt) - containing the normalized expression for each gene across all 300 samples.
-2. [Gene ranks](https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt) - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)
+- [Gene ranks](https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt) - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)
 
 ```{r}
 library(RCurl)
-matrix <- getURL("https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt")
-RNASeq_expression_matrix <- read.table(text=matrix, header = TRUE, sep = "\t", quote="\"", stringsAsFactors = FALSE)
-```
-
-```{r}
-RNASeq_expression_matrix
-```
-
-```{r}
 matrix <- getURL("https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt")
 RNASeq_gene_scores <- read.table(text=matrix, header = TRUE, sep = "\t", quote="\"", stringsAsFactors = FALSE)
 ```
