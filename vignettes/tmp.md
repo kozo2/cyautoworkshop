@@ -231,13 +231,13 @@ There are endless amounts of databases storing interaction data.
 
 ![image](https://user-images.githubusercontent.com/12192/139541346-9e223e88-e6df-4e4d-b7f2-a5836f6e97eb.png)
 
-We are going to query the String Database to get all interactions found for our set of top Mesenchymal genes.
+We are going to query the STRING Database to get all interactions found for our set of top Mesenchymal genes.
 
 ### Cytoscape Apps with network data
 Thankfully we don't have to query each independently.
 In addition to many specialized (for example, for specific molecules, interaction type, or species) interaction databases there are also databases that collate these databases to create a broad resource that is easier to use. For example:
 
-- [stringApp](https://apps.cytoscape.org/apps/stringapp) - is a protein-protein and protein-chemical database that imports data from [String(Szklarczyk et al.)](https://doi.org/10.1093/nar/gkaa1074), [STITCH] into a unified, queriable database.
+- [stringApp](https://apps.cytoscape.org/apps/stringapp) - is a protein-protein and protein-chemical database that imports data from [STRING(Szklarczyk et al.)](https://doi.org/10.1093/nar/gkaa1074), [STITCH] into a unified, queriable database.
 
 You can install apps in Cytoscape directly from R.
 
@@ -327,11 +327,11 @@ String network with new layout
 
 ![relayout_string_network](https://user-images.githubusercontent.com/12192/139554068-55353d6a-62e2-4956-b2c6-cda4cc5a28d8.png)
 
-## Overlay our expression analysis data on the String network
+## Overlay our expression analysis data on the STRING network
 
 To do this we will be using the loadTableData function from RCy3.
 It is important to make sure that that your identifiers types match up.
-You can check what is used by String by pulling in the column names of the node attribute table.
+You can check what is used by STRING by pulling in the column names of the node attribute table.
 
 ```{r}
 getTableColumnNames('node')
