@@ -257,6 +257,10 @@ Simply specify what command you would like to get information on by adding its n
 For example “commandsHelp("help string”)“
 
 ```{r}
+commandsHelp("help")
+```
+
+```{r}
 commandsHelp("help string")
 ```
 
