@@ -49,21 +49,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/HOWTO_BUILD_WORKSHOP.html">How To Build A Workshop Package</a>
-    </li>
-    <li>
-      <a href="../articles/workshop_example.html">An Example Workshop</a>
-    </li>
-  </ul>
-</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -95,119 +80,90 @@
 
     
     
-<div id="cytoscape-automation-with-rcy3" class="section level1">
+<div id="pre-workshop-instructions" class="section level1">
 <h1 class="hasAnchor">
-<a href="#cytoscape-automation-with-rcy3" class="anchor"></a>Cytoscape automation with RCy3</h1>
-<p>BioC Asia 2021: 1-4 Nov</p>
-<div id="instructor" class="section level2">
+<a href="#pre-workshop-instructions" class="anchor"></a>Pre-Workshop Instructions</h1>
+<p>Please perform the following steps <em>before the workshop</em>. These steps take a few minutes and you may have issues specific to your machine.</p>
+<div id="step-1-install-the-latest-cytoscape-into-your-desktop-environment3-9-0" class="section level2">
 <h2 class="hasAnchor">
-<a href="#instructor" class="anchor"></a>Instructor</h2>
+<a href="#step-1-install-the-latest-cytoscape-into-your-desktop-environment3-9-0" class="anchor"></a>STEP 1: Install the latest Cytoscape into your Desktop environment(3.9.0)</h2>
 <ul>
-<li>Kozo Nishida (<a href="mailto:kozo.nishida@gmail.com" class="email">kozo.nishida@gmail.com</a>)</li>
+<li>If you have Cytoscape installed before 3.9.0, please update it.</li>
+<li>
+<a href="https://cytoscape.org/download.html">Download Cytoscape</a>.</li>
+<li>Open and follow installation steps.
+<ul>
+<li>If you don’t have Java in your environment, Cytoscape will ask you if you want to download it. Please accept it and download Java.</li>
+</ul>
+</li>
+</ul>
+<p>Mac users need to be careful about <img src="https://user-images.githubusercontent.com/12192/139439069-dba3e46a-8fe2-414c-98fe-55d02ba39e32.png" alt="image"></p>
+<ul>
+<li>Launch Cytoscape 3.9.0 from start menu or Desktop shortcut</li>
+</ul>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139441980-5d73579f-39dd-45da-916b-759eff99474d.png" alt=""><p class="caption">image</p>
+</div>
+<ul>
+<li>A message like the above image will appear, so press the OK button to restart Cytoscape.</li>
+<li>and keep Cytoscape up and running.</li>
 </ul>
 </div>
-<div id="workshop-description" class="section level2">
+<div id="step-2-install-google-chrome-and-the-rcy3-package-in-google-colab" class="section level2">
 <h2 class="hasAnchor">
-<a href="#workshop-description" class="anchor"></a>Workshop Description</h2>
-<p>Cytoscape is a network visualization platform for biology. Recently, workflows using Cytoscape can be automatically executed in R and Python. This is important not only because it can be done automatically, but also because it allows you to take advantage of the rich data analysis packages of R or Python. In this workshop, I will explain the basic usage of automation and more practical usage.</p>
-<div id="prerequisites" class="section level3">
-<h3 class="hasAnchor">
-<a href="#prerequisites" class="anchor"></a>Prerequisites</h3>
+<a href="#step-2-install-google-chrome-and-the-rcy3-package-in-google-colab" class="anchor"></a>STEP 2: Install Google Chrome and the RCy3 package in Google Colab</h2>
 <ul>
-<li>Basic knowledge of Cytoscape</li>
-<li>Basic knowledge of R</li>
-<li>Basic understanding of the biological network database (STRING)</li>
-</ul>
-<p>Useful background reading</p>
+<li>You will need to get a Google Account to use Colab</li>
+<li>You will need to install Google Chrome. Our Notebook does not work with Safari. Firefox may work, but I haven’t confirmed it.</li>
+<li>Open this Google Colab link in Chrome while logged in to Google.
 <ul>
-<li>The <a href="https://bioconductor.org/packages/release/bioc/html/RCy3.html">RCy3</a> vignettes.</li>
+<li>Simply run the following code cell</li>
 </ul>
-</div>
-<div id="preparation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#preparation" class="anchor"></a>Preparation</h3>
-<p>We have created a Jupyter Notebook that can be run on <a href="https://colab.research.google.com/">Google Colab</a> so that you can reproduce this workshop. You must have a Google account to access this. You also need to have <a href="https://cytoscape.org/download.html">the desktop version of Cytoscape</a> installed within your local desktop environment. After the Cytoscape installation is complete, you need to launch Cytoscape. And after you launch Cytoscape, you can run the notebook for this workshop.</p>
-<div id="disclaimer" class="section level4">
-<h4 class="hasAnchor">
-<a href="#disclaimer" class="anchor"></a>Disclaimer</h4>
-<p>Unlike other workshops, this workshop does not use <a href="http://app.orchestra.cancerdatasci.org/">the Orchestra platform</a>. This is because my notebook is doing a browser hack using Javascript. We considered making this work in Orchestra, but we couldn’t make it happen by this workshop.</p>
-<p>However, an Orchestra-style workshop environment is also available <strong>as long as it is within your local environment</strong> rather than the Orchestra.</p>
-<pre><code>docker run -d -p 8888:8888 kozo2/cyautoworkshop</code></pre>
-<p>and visit <a href="http://localhost:8888" class="uri">http://localhost:8888</a> in your browser.</p>
-</div>
-</div>
-<div id="workshop-participation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#workshop-participation" class="anchor"></a>Workshop Participation</h3>
-<p>After the basic concepts of Cytoscape automation is introduced, students will be given the opportunity to reproduce more practical example workflow.</p>
-</div>
-<div id="bioconductor-packages-used" class="section level3">
-<h3 class="hasAnchor">
-<a href="#bioconductor-packages-used" class="anchor"></a>Bioconductor packages used</h3>
+<pre><code>devtools::install_github("cytoscape/RCy3")</code></pre>
+</li>
+<li>It takes a few minutes for install_github to finish.
 <ul>
-<li>RCy3</li>
+<li>Let’s leave it alone and move onto the main workshop.</li>
 </ul>
-<p>This repository provides biologically relevant analyses using the <a href="https://bioconductor.org/packages/RCy3/">RCy3</a> package.</p>
+</li>
+</ul>
 </div>
 </div>
-<div id="workshop-goals-and-objectives" class="section level2">
+<div id="main-workshop-primer" class="section level1">
+<h1 class="hasAnchor">
+<a href="#main-workshop-primer" class="anchor"></a>Main workshop (primer)</h1>
+<div id="self-introduction" class="section level2">
 <h2 class="hasAnchor">
-<a href="#workshop-goals-and-objectives" class="anchor"></a>Workshop goals and objectives</h2>
-<div id="learning-goals" class="section level3">
-<h3 class="hasAnchor">
-<a href="#learning-goals" class="anchor"></a>Learning goals</h3>
-</div>
-<div id="learning-objectives" class="section level3">
-<h3 class="hasAnchor">
-<a href="#learning-objectives" class="anchor"></a>Learning objectives</h3>
-</div>
-</div>
-<div id="cytoscape-automation-workshop" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cytoscape-automation-workshop" class="anchor"></a>Cytoscape Automation Workshop</h2>
-<div id="introductions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#introductions" class="anchor"></a>Introductions</h3>
-<p>Kozo Nishida, RIKEN - A member of Bioconductor community advisory board - Author of a Bioconductor package based on RCy3 (transomics2cytoscape) - Cytoscape community contributor (Google Summer of Code, Google Season of Docs) - Author of KEGGscape Cytoscape App</p>
-</div>
+<a href="#self-introduction" class="anchor"></a>Self-introduction</h2>
+<p>Kozo Nishida, RIKEN, Japan - A member of Bioconductor Community Advisory Board (CAB) - Author of a Bioconductor package based on RCy3 (transomics2cytoscape) - Cytoscape community contributor (Google Summer of Code, Google Season of Docs) - Author of KEGGscape Cytoscape App</p>
 </div>
 <div id="what-is-cytoscape" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-cytoscape" class="anchor"></a>What is Cytoscape?</h2>
 <div class="figure">
-<img src="https://user-images.githubusercontent.com/12192/139395948-a00a68f1-64c4-4dbd-b33e-a7258a4b2e4e.png" alt=""><p class="caption">image</p>
+<img src="https://user-images.githubusercontent.com/12192/139426468-915e9a76-7e4e-4a37-aee9-3d0e344f551e.png" alt=""><p class="caption">image</p>
 </div>
 <ul>
-<li>Network nodes and edges have annotation tables.</li>
-<li>Color, shape, size, or … according to the annotation table can be mapped to nodes and edges.</li>
-<li>The main usage was to manually execute the workflow with the GUI.</li>
-<li>Recently, automating Cytoscape operations from notebooks that describe workflows from R or Python has become more popular.</li>
+<li>Open source, cross platform Java desktop GUI app.</li>
+<li>for network visualization.</li>
 </ul>
-</div>
-<div id="how-can-cytoscape-operations-be-automated" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-can-cytoscape-operations-be-automated" class="anchor"></a>How can Cytoscape operations be automated?</h2>
+<div id="core-concepts" class="section level3">
+<h3 class="hasAnchor">
+<a href="#core-concepts" class="anchor"></a>Core concepts</h3>
+<p><strong>Networks and Tables</strong>: Network nodes and edges have annotation tables.</p>
 <div class="figure">
-<img src="https://user-images.githubusercontent.com/12192/139397677-80076550-e458-4bd4-9ab5-ba48ef6843b9.png" alt=""><p class="caption">image</p>
+<img src="https://user-images.githubusercontent.com/12192/139427094-bfd9a839-dabf-468d-8f28-6458443c8e61.png" alt=""><p class="caption">image</p>
 </div>
-<ul>
-<li>Cytoscape has built-in command system like shell commands (for operating Cytoscape).
-<ul>
-<li>They are also provided as REST APIs.</li>
-</ul>
-</li>
-<li>However, since table operations are essential, it is convenient to be able to operate them with R or Python.
-<ul>
-<li>RCy3 or py4cytoscape</li>
-<li>py4cytoscape is Python clone of RCy3</li>
-</ul>
-</li>
-</ul>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139427149-4f0fe568-3851-4de6-834e-2e809e85f1be.png" alt=""><p class="caption">image</p>
+</div>
+<p>Color, shape, size, or … according to the annotation table can be mapped to nodes and edges.</p>
+</div>
 </div>
 <div id="why-do-we-need-to-automate" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-do-we-need-to-automate" class="anchor"></a>Why do we need to automate?</h2>
-<p>Why run a script when I could just use Cytoscape directly?</p>
+<p>Why automate Cytoscape when I could just use the GUI directly?</p>
 <ul>
 <li>For things you want to do multiple times, e.g., loops</li>
 <li>For things you want to repeat in the future</li>
@@ -218,6 +174,32 @@
 </ul>
 </li>
 </ul>
+<p>In short, for “reproducibility”, “data sharing”, “the use of R or Python”.</p>
+</div>
+<div id="how-can-cytoscape-gui-operations-be-automated" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-can-cytoscape-gui-operations-be-automated" class="anchor"></a>How can Cytoscape GUI operations be automated?</h2>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139397677-80076550-e458-4bd4-9ab5-ba48ef6843b9.png" alt=""><p class="caption">image</p>
+</div>
+<ul>
+<li><p>Cytoscape makes that possible with the REST API.</p></li>
+<li><p>Today Cytoscape is not only a Desktop application but also a REST server.</p></li>
+<li>
+<p>You can check if Cytoscape is now working as a server with the command below.</p>
+<pre><code>curl localhost:1234</code></pre>
+</li>
+<li>
+<p>Now Cytoscape has REST API for almost every GUI operation.</p>
+<ul>
+<li>RCy3 or py4cytoscape is R or Python wrapper of the REST API</li>
+<li>py4cytoscape is Python clone of RCy3, py4cytoscape has same function specifications with RCy3</li>
+</ul>
+</li>
+<li><p>Since table operations are essential for Bioinformatics, it is convenient to be able to operate them with R[dplyr] or Python[pandas].</p></li>
+</ul>
+<p><a href="https://dx.doi.org/10.12688%2Ff1000research.6767.1">CyREST: Turbocharging Cytoscape Access for External Tools via a RESTful API. F1000Research 2015.</a></p>
+<p><a href="https://doi.org/10.1186/s13059-019-1758-4">Cytoscape Automation: empowering workflow-based network analysis. Genome Biology 2019.</a></p>
 </div>
 <div id="automation-with-rcy3" class="section level2">
 <h2 class="hasAnchor">
@@ -226,6 +208,228 @@
 <img src="https://user-images.githubusercontent.com/12192/139400142-8a2a764b-dbbe-4e47-9d3c-d4cc07602468.png" alt=""><p class="caption">image</p>
 </div>
 <p><a href="https://f1000research.com/articles/8-1774">RCy3: Network biology using Cytoscape from within R. F1000Research 2019.</a></p>
+</div>
+<div id="translating-r-data-into-a-cytoscape-network-using-rcy3" class="section level2">
+<h2 class="hasAnchor">
+<a href="#translating-r-data-into-a-cytoscape-network-using-rcy3" class="anchor"></a>Translating R data into a Cytoscape network using RCy3</h2>
+<p>Networks offer us a useful way to represent our biological data. But how do we seamlessly translate our data from R into Cytoscape?</p>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139404069-536a67a2-e8fe-4072-bc42-74bfb060f924.png" alt=""><p class="caption">image</p>
+</div>
+<p>From here it finally becomes hands-on using Google Colab. Aside from the details, let’s connect Google Colab to local Cytoscape.</p>
+<p>Make sure your local Cytoscape is fully up and running before running the code below. It will take some time for Cytoscape to start up and its REST server to start up completely. (Please wait for about 10 seconds.)</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cytoscape/RCy3">RCy3</a></span><span class="op">)</span>
+<span class="va">browserClientJs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getBrowserClientJs.html">getBrowserClientJs</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu">IRdisplay</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/IRdisplay/man/display-textual.html">display_javascript</a></span><span class="op">(</span><span class="va">browserClientJs</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/cytoscapePing.html">cytoscapePing</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div id="why-was-the-remote-google-colab-able-to-communicate-with-the-local-cytoscape-rest-service" class="section level3">
+<h3 class="hasAnchor">
+<a href="#why-was-the-remote-google-colab-able-to-communicate-with-the-local-cytoscape-rest-service" class="anchor"></a>Why was the remote Google Colab able to communicate with the local Cytoscape REST service?</h3>
+<p>We need a detailed description of what happened in</p>
+<pre><code>browserClientJs &lt;- getBrowserClientJs()
+IRdisplay::display_javascript(browserClientJs)</code></pre>
+<p>We used a technology called <strong>Jupyter Bridge</strong> in the above code. Jupyter Bridge is a JavaScript implementation that makes HTTP requests from a remote REST client look like local requests.</p>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139530994-8afd99b2-1175-46b3-9ad7-166d8ba78f2a.png" alt=""><p class="caption">image</p>
+</div>
+<p>Since it is difficult to access Cytoscape in the desktop environment from a remote environment, we use Jupyter Bridge.</p>
+<p>And since I couldn’t get Jupyter Bridge to work in the Orchestra environment, this workshop is exceptionally using Google Colab instead of Orchestra.</p>
+<p>If you have RCy3 installed locally instead of remotely like Google Colab, you don’t need to use this Jupyter Bridge technology.</p>
+</div>
+<div id="then-why-use-jupyter-bridge" class="section level3">
+<h3 class="hasAnchor">
+<a href="#then-why-use-jupyter-bridge" class="anchor"></a>(Then) Why use Jupyter Bridge?</h3>
+<ul>
+<li>Users do not need to worry about dependencies and environment.</li>
+<li>Easily share notebook-based workflows and data sets</li>
+<li>Workflows can reside in the cloud, access cloud resources, and yet still use Cytoscape features.</li>
+</ul>
+</div>
+<div id="lets-go-back-to-how-to-translate-r-data-into-a-cytoscape-network" class="section level3">
+<h3 class="hasAnchor">
+<a href="#lets-go-back-to-how-to-translate-r-data-into-a-cytoscape-network" class="anchor"></a>Let’s go back to how to translate R data into a Cytoscape network…</h3>
+<p>Create a Cytoscape network from some basic R objects</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"node 0"</span>,<span class="st">"node 1"</span>,<span class="st">"node 2"</span>,<span class="st">"node 3"</span><span class="op">)</span>,
+    group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>,<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"B"</span><span class="op">)</span>, <span class="co"># categorical strings</span>
+    score<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>, <span class="co"># integers</span>
+    stringsAsFactors<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">edges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>source<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"node 0"</span>,<span class="st">"node 0"</span>,<span class="st">"node 0"</span>,<span class="st">"node 2"</span><span class="op">)</span>,
+    target<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"node 1"</span>,<span class="st">"node 2"</span>,<span class="st">"node 3"</span>,<span class="st">"node 3"</span><span class="op">)</span>,
+    interaction<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"inhibits"</span>,<span class="st">"interacts"</span>,<span class="st">"activates"</span>,<span class="st">"interacts"</span><span class="op">)</span>,  <span class="co"># optional</span>
+    weight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5.1</span>,<span class="fl">3.0</span>,<span class="fl">5.2</span>,<span class="fl">9.9</span><span class="op">)</span>, <span class="co"># numeric</span>
+    stringsAsFactors<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div id="data-frame-used-to-create-network" class="section level4">
+<h4 class="hasAnchor">
+<a href="#data-frame-used-to-create-network" class="anchor"></a>Data frame used to create Network</h4>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139534280-0c569dfd-d66d-4054-9b58-becce79225bc.png" alt=""><p class="caption">image</p>
+</div>
+</div>
+<div id="create-network" class="section level4">
+<h4 class="hasAnchor">
+<a href="#create-network" class="anchor"></a>Create Network</h4>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/createNetworkFromDataFrames.html">createNetworkFromDataFrames</a></span><span class="op">(</span><span class="va">nodes</span>, <span class="va">edges</span>, title<span class="op">=</span><span class="st">"my first network"</span>, collection<span class="op">=</span><span class="st">"DataFrame Example"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="export-an-image-of-the-network" class="section level4">
+<h4 class="hasAnchor">
+<a href="#export-an-image-of-the-network" class="anchor"></a>Export an image of the network</h4>
+<p>Remember. All networks we make are created in Cytoscape so get an image of the resulting network and include it in your current analysis if desired.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/exportImage.html">exportImage</a></span><span class="op">(</span><span class="st">"my_first_network"</span>, type <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span></code></pre></div>
+<p>Initial simple network</p>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139537190-1f79f871-5dbd-4779-9a4f-7c67f263101b.png" alt=""><p class="caption">image</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="main-workshop-more-practical" class="section level1">
+<h1 class="hasAnchor">
+<a href="#main-workshop-more-practical" class="anchor"></a>Main workshop (more practical)</h1>
+<div id="example-use-cases" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-use-cases" class="anchor"></a>Example Use Cases</h2>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Omics data</strong> - I have a ———– fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?</li>
+<li>
+<strong>Coexpression data</strong> - I have a dataset that represents relationships. How do I represent it as a network.</li>
+<li>
+<strong>Omics data</strong> - I have a ———–fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. I have run my data through a functional enrichment tool and now have a set of enriched terms associated with my dataset. How do I represent my functional enrichments as a network?</li>
+</ol>
+</div>
+<div id="example-data-set" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-data-set" class="anchor"></a>Example Data Set</h2>
+<p>We downloaded gene expression data from the Ovarian Serous Cystadenocarcinoma project of The Cancer Genome Atlas (TCGA)(International Genome et al.), <a href="http://cancergenome.nih.gov" class="uri">http://cancergenome.nih.gov</a> via the Genomic Data Commons (GDC) portal(Grossman et al.) on 2017-06-14 using <a href="http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html">TCGABiolinks Bioconductor package(Colaprico et al.)</a>.</p>
+<ul>
+<li>300 samples available as RNA-seq data</li>
+<li>79 classified as Immunoreactive, 72 classified as Mesenchymal, 69 classified as Differentiated, and 80 classified as Proliferative samples</li>
+<li>RNA-seq read counts were converted to CPM values and genes with CPM &gt; 1 in at least 50 of the samples are retained for further study</li>
+<li>The data was normalized and differential expression was calculated for each cancer class relative to the rest of the samples.</li>
+</ul>
+<p>There are two data files:</p>
+<ol style="list-style-type: decimal">
+<li>
+<a href="https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt">Expression matrix</a> - containing the normalized expression for each gene across all 300 samples.</li>
+<li>
+<a href="https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt">Gene ranks</a> - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RCurl</span><span class="op">)</span>
+<span class="va">matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCurl/man/getURL.html">getURL</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt"</span><span class="op">)</span>
+<span class="va">RNASeq_expression_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">matrix</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">"\t"</span>, quote<span class="op">=</span><span class="st">"\""</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">RNASeq_expression_matrix</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCurl/man/getURL.html">getURL</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt"</span><span class="op">)</span>
+<span class="va">RNASeq_gene_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">matrix</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">"\t"</span>, quote<span class="op">=</span><span class="st">"\""</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">RNASeq_gene_scores</span></code></pre></div>
+</div>
+<div id="use-case---how-are-my-top-genes-related" class="section level2">
+<h2 class="hasAnchor">
+<a href="#use-case---how-are-my-top-genes-related" class="anchor"></a>Use Case - How are my top genes related?</h2>
+<p>Omics data - I have a ———–fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?</p>
+<p>There are endless amounts of databases storing interaction data.</p>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139541346-9e223e88-e6df-4e4d-b7f2-a5836f6e97eb.png" alt=""><p class="caption">image</p>
+</div>
+<p>Get a subset of genes of interest from our scored data:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">top_mesenchymal_genes</span> <span class="op">&lt;-</span> <span class="va">RNASeq_gene_scores</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">FDR.mesen</span> <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="op">&amp;</span> <span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">logFC.mesen</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span>,<span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">top_mesenchymal_genes</span><span class="op">)</span></code></pre></div>
+<p>We are going to query the String Database to get all interactions found for our set of top Mesenchymal genes.</p>
+<div id="cytoscape-apps-with-network-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cytoscape-apps-with-network-data" class="anchor"></a>Cytoscape Apps with network data</h3>
+<p>Thankfully we don’t have to query each independently. In addition to many specialized (for example, for specific molecules, interaction type, or species) interaction databases there are also databases that collate these databases to create a broad resource that is easier to use. For example:</p>
+<ul>
+<li>
+<a href="https://apps.cytoscape.org/apps/stringapp">stringApp</a> - is a protein-protein and protein-chemical database that imports data from <a href="https://doi.org/10.1093/nar/gkaa1074">String(Szklarczyk et al.)</a>, [STITCH] into a unified, queriable database.</li>
+</ul>
+<p>You can install apps in Cytoscape directly from R.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/installApp.html">installApp</a></span><span class="op">(</span><span class="st">"stringApp"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="help-on-specific-cytoscape-command" class="section level3">
+<h3 class="hasAnchor">
+<a href="#help-on-specific-cytoscape-command" class="anchor"></a>Help on specific cytoscape command</h3>
+<p>To get information about an individual command from the R environment you can also use the commandsHelp function. Simply specify what command you would like to get information on by adding its name to the command. For example “commandsHelp(”help string”)“</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help string"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help string protein query"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mesen_string_interaction_cmd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">'string protein query taxonID=9606 limit=150 cutoff=0.9 query="'</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">top_mesenchymal_genes</span><span class="op">$</span><span class="va">Name</span>, collapse<span class="op">=</span><span class="st">","</span><span class="op">)</span>,<span class="st">'"'</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsGET.html">commandsGET</a></span><span class="op">(</span><span class="va">mesen_string_interaction_cmd</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/exportImage.html">exportImage</a></span><span class="op">(</span><span class="st">"initial_string_network"</span>, type <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139543384-b19ac0f3-1dc9-4e6d-a212-af4f19ab6529.png" alt=""><p class="caption">initial_string_network</p>
+</div>
+</div>
+<div id="layouts" class="section level3">
+<h3 class="hasAnchor">
+<a href="#layouts" class="anchor"></a>Layouts</h3>
+<p>Layout the network</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/layoutNetwork.html">layoutNetwork</a></span><span class="op">(</span><span class="st">'force-directed'</span><span class="op">)</span></code></pre></div>
+<p>Check what other layout algorithms are available to try out</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getLayoutNames.html">getLayoutNames</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="layouts---contd" class="section level3">
+<h3 class="hasAnchor">
+<a href="#layouts---contd" class="anchor"></a>Layouts - cont’d</h3>
+<p>Get the parameters for a specific layout</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getLayoutPropertyNames.html">getLayoutPropertyNames</a></span><span class="op">(</span>layout.name<span class="op">=</span><span class="st">'force-directed'</span><span class="op">)</span></code></pre></div>
+<p>Re-layout the network using the force directed layout but specify some of the parameters</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/layoutNetwork.html">layoutNetwork</a></span><span class="op">(</span><span class="st">'force-directed defaultSpringCoefficient=0.0000008 defaultSpringLength=70'</span><span class="op">)</span></code></pre></div>
+<p>Get a screenshot of the re-laid out network</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">response</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/exportImage.html">exportImage</a></span><span class="op">(</span><span class="st">"relayout_string_network"</span>, type <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">response</span></code></pre></div>
+<p>String network with new layout <img src="https://user-images.githubusercontent.com/12192/139554068-55353d6a-62e2-4956-b2c6-cda4cc5a28d8.png" alt="relayout_string_network"></p>
+</div>
+</div>
+<div id="overlay-our-expression-data-on-the-string-network-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overlay-our-expression-data-on-the-string-network-" class="anchor"></a>Overlay our expression data on the String network.</h2>
+<p>To do this we will be using the loadTableData function from RCy3. It is important to make sure that that your identifiers types match up. You can check what is used by String by pulling in the column names of the node attribute table.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getTableColumnNames.html">getTableColumnNames</a></span><span class="op">(</span><span class="st">'node'</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="overlay-our-expression-data-on-the-string-network---contd" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overlay-our-expression-data-on-the-string-network---contd" class="anchor"></a>Overlay our expression data on the String network - cont’d</h2>
+<p>If you are unsure of what each column is and want to further verify the column to use you can also pull in the entire node attribute table.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">node_attribute_table_topmesen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getTableColumns.html">getTableColumns</a></span><span class="op">(</span>table<span class="op">=</span><span class="st">"node"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">node_attribute_table_topmesen</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139554236-dc19aaf7-8186-40f0-9ed3-d50a46c64d27.png" alt=""><p class="caption">image</p>
+</div>
+<p>The column “display name” contains HGNC gene names which are also found in our Ovarian Cancer dataset.</p>
+<p>To import our expression data we will match our dataset to the “display name” node attribute.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/loadTableData.html">loadTableData</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span>, table.key.column <span class="op">=</span> <span class="st">"display name"</span>, data.key.column <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span>  <span class="co">#default data.frame key is row.names</span></code></pre></div>
+</div>
+<div id="visual-style" class="section level2">
+<h2 class="hasAnchor">
+<a href="#visual-style" class="anchor"></a>Visual Style</h2>
+<p>Modify the visual style Create your own visual style to visualize your expression data on the String network. Start with a default style</p>
+<p><strong>Formatted String network</strong></p>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139555494-3d46d339-153d-4c93-bf06-c393375ba2be.png" alt=""><p class="caption">mesen_string_network</p>
+</div>
 </div>
 </div>
   </div>
