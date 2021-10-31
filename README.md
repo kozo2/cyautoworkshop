@@ -58,5 +58,6 @@ This repository provides biologically relevant analyses using the [RCy3](https:/
 - Know how to overlay expression analysis results on the interaction network
 
 ### Learning objectives
-
-
+- Be able to automate local Cytoscape operations from Google Colab R
+- Be able to control Cytoscape from RCy3 packages
+- Be able to integrate R table data into Cytoscape network (node or edge) tables
