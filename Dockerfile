@@ -1,4 +1,4 @@
-FROM bioconductor/bioconductor_docker:RELEASE_3_14
+FROM bioconductor/bioconductor_docker:devel
 
 LABEL name="kozo2/cyautoworkshop"
 
