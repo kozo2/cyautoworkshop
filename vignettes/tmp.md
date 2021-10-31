@@ -190,13 +190,11 @@ Initial simple network
 
 # Main workshop (more practical)
 
-## Example Use Cases
+## Example Use Case 1
 
-1. **Omics data** - I have a ----------- fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?
-2. **Coexpression data** - I have a dataset that represents relationships. How do I represent it as a network.
-3. **Omics data** - I have a -----------fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. I have run my data through a functional enrichment tool and now have a set of enriched terms associated with my dataset. How do I represent my functional enrichments as a network?
+**Omics data** - I have a ----------- fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?
 
-## Example Data Set
+## The example data set
 
 We downloaded gene expression data from the Ovarian Serous Cystadenocarcinoma project of The Cancer Genome Atlas (TCGA)(International Genome et al.),
 http://cancergenome.nih.gov via the Genomic Data Commons (GDC) portal(Grossman et al.) on 2017-06-14 using [TCGABiolinks Bioconductor package(Colaprico et al.)](http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html).
