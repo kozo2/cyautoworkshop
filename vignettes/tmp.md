@@ -245,6 +245,12 @@ You can install apps in Cytoscape directly from R.
 installApp("stringApp")
 ```
 
+You can check it was successfully installed with:
+
+```{r}
+getAppStatus("stringApp")
+```
+
 ### Help on specific cytoscape command
 To get information about an individual command from the R environment you can also use the commandsHelp function.
 Simply specify what command you would like to get information on by adding its name to the command.
