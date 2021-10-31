@@ -218,7 +218,7 @@ RNASeq_gene_scores <- read.table(text=matrix, header = TRUE, sep = "\t", quote="
 RNASeq_gene_scores
 ```
 
-Get a subset of genes of interest from our scored data:
+Get a subset of genes of interest from the scored data:
 
 ```{r}
 top_mesenchymal_genes <- RNASeq_gene_scores[which(RNASeq_gene_scores$FDR.mesen < 0.05 & RNASeq_gene_scores$logFC.mesen > 2),]
