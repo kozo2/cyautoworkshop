@@ -146,7 +146,7 @@ you don't need to use this Jupyter Bridge technology.
 - Easily share notebook-based workflows and data sets
 - Workflows can reside in the cloud, access cloud resources, and yet still use Cytoscape features.
 
-### Let's go back to how to translate R data into a Cytoscape network...
+## Let's go back to how to translate R data into a Cytoscape network...
 
 Create a Cytoscape network from some basic R objects
 
@@ -155,6 +155,9 @@ nodes <- data.frame(id=c("node 0","node 1","node 2","node 3"),
     group=c("A","A","B","B"), # categorical strings
     score=as.integer(c(20,10,15,5)), # integers
     stringsAsFactors=FALSE)
+```
+
+```{r}
 edges <- data.frame(source=c("node 0","node 0","node 0","node 2"),
     target=c("node 1","node 2","node 3","node 3"),
     interaction=c("inhibits","interacts","activates","interacts"),  # optional
