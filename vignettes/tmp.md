@@ -273,7 +273,12 @@ mesen_string_interaction_cmd <- paste('string protein query taxonID=9606 limit=1
 commandsGET(mesen_string_interaction_cmd)
 ```
 
-Please see https://string-db.org/help/api/ for details.
+- cutoff: The confidence score reflects the cumulated evidence that this interaction exists. Only interactions with scores greater than this cutoff will be returned.
+- limit: The maximum number of proteins to return in addition to the query set.
+- query: Comma separated list of protein names or identifiers.
+- taxonID: The species taxonomy ID. See the NCBI taxonomy home page for IDs. If both species and taxonID are set to a different species, the taxonID has priority.
+
+Please see Cytoscape menubar "Help -> Automation -> CyREST Commands API" for details.
 
 ```{r}
 exportImage("initial_string_network", type = "png")
