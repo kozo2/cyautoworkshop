@@ -51,6 +51,11 @@ This repository provides biologically relevant analyses using the [RCy3](https:/
 ## Workshop goals and objectives
 
 ### Learning goals
+- Understand network data structures in Cytoscape
+- Understand how Cytoscape automation works
+- Know how to translate R data into Cytoscape network
+- Know how to querying the interaction database and getting it into Cytoscape
+- Know how to overlay expression analysis results on the interaction network
 
 ### Learning objectives
 
