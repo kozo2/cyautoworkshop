@@ -319,6 +319,7 @@ response
 ```
 
 String network with new layout
+
 ![relayout_string_network](https://user-images.githubusercontent.com/12192/139554068-55353d6a-62e2-4956-b2c6-cda4cc5a28d8.png)
 
 ## Overlay our expression data on the String network.
