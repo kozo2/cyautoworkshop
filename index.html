@@ -97,11 +97,11 @@
 <div id="preparation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#preparation" class="anchor"></a>Preparation</h3>
-<p>You need to use <a href="https://colab.research.google.com/">Google Colab</a> to run and reproduce the workshop material. You must have a Google account to access this. You also need to use <a href="https://cytoscape.org/download.html">Cytoscape</a> in your local desktop environment in addition to Google Colab. Unlike other workshops, this workshop cannot be run only in a remote environment. You need to use a combination of remote Google Colab and local Cytoscape. How to set them up will be described later.</p>
+<p>You need to use <a href="https://colab.research.google.com/">Google Colab</a> to run and reproduce the workshop material. You must have a Google account to access this. You also need to use <a href="https://cytoscape.org/download.html">Cytoscape</a> in your local desktop environment in addition to Google Colab. Unlike other workshops, this workshop cannot be reproducible only with a remote environment. You need to use a combination of remote Google Colab <strong>and local Cytoscape</strong>. How to set them up will be described later.</p>
 <div id="disclaimer" class="section level4">
 <h4 class="hasAnchor">
 <a href="#disclaimer" class="anchor"></a>Disclaimer</h4>
-<p>Unlike other workshops, this workshop does not use <a href="http://app.orchestra.cancerdatasci.org/">the Orchestra platform</a>. This is because my notebook is doing a browser hack using JavaScript. Currently that JavaScript doesn’t work in Orchestra.</p>
+<p>Unlike the other BioC Asia workshops, this workshop does not use <a href="http://app.orchestra.cancerdatasci.org/">the Orchestra platform</a>. This is because my notebook is using JavaScript called Jupyter Bridge. Currently the Jupyter Bridge doesn’t work in Orchestra. I will also explain about this later.</p>
 <p>However, an Orchestra-style workshop environment is also available <strong>as long as it is within your local environment</strong> rather than the Orchestra.</p>
 <pre><code>docker run -d -p 8888:8888 kozo2/cyautoworkshop</code></pre>
 <p>and visit <a href="http://localhost:8888" class="uri">http://localhost:8888</a> in your browser.</p>
@@ -110,15 +110,25 @@
 <div id="workshop-participation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#workshop-participation" class="anchor"></a>Workshop Participation</h3>
-<p>After the basic concepts of Cytoscape automation is introduced, students will be given the opportunity to reproduce more practical example workflow.</p>
+<p>After the basic concepts of Cytoscape automation is introduced, students will be given the opportunity to reproduce basic and practical example workflow.</p>
 </div>
 <div id="bioconductor-packages-used" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bioconductor-packages-used" class="anchor"></a>Bioconductor packages used</h3>
 <ul>
-<li>RCy3</li>
+<li>RCy3 2.13.9 or after</li>
 </ul>
 <p>This repository provides biologically relevant analyses using the <a href="https://bioconductor.org/packages/RCy3/">RCy3</a> package.</p>
+<div id="the-other-dependencies" class="section level4">
+<h4 class="hasAnchor">
+<a href="#the-other-dependencies" class="anchor"></a>The other dependencies</h4>
+<ul>
+<li>Google Account (for using Google Colab)</li>
+<li>Google Chrome (for using Jupyter Bridge)</li>
+<li>Cytoscape 3.9.0 (<strong>in your local Desktop environment</strong>, not in remote environment)</li>
+</ul>
+<p>This workshop use Google Colab and Cytoscape (in your local desktop).</p>
+</div>
 </div>
 </div>
 <div id="workshop-goals-and-objectives" class="section level2">
