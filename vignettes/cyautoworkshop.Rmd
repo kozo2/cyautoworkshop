@@ -36,14 +36,15 @@ Mac users need to be careful about
 - and keep Cytoscape up and running.
 
 ## STEP 2: Install Google Chrome and the RCy3 package in Google Colab
-- You will need to get a Google Account to use Colab
+- You will need to get a Google Account to use Colab.
 - You will need to install Google Chrome. Our Notebook does not work with Safari. Firefox may work, but I haven't confirmed it.
-- Open this Google Colab link in Chrome while logged in to Google.
-  - Simply run the following code cell
+- Open [this Google Colab link](https://colab.research.google.com/drive/1OW9dUD5JOfcYJpiM2lyNIapJQHpKVJiZ?usp=sharing) in Chrome while logged in to Google.
+- Run the following code cell
 
-  ```
-  devtools::install_github("cytoscape/RCy3")
-  ```
+```{r}
+devtools::install_github("cytoscape/RCy3")
+```
+  
 - It takes a few minutes for install_github to finish.
   - Let's leave it alone and move onto the main workshop.
 
@@ -52,6 +53,7 @@ Mac users need to be careful about
 ## Self-introduction
 
 Kozo Nishida, RIKEN, Japan
+
 - A member of Bioconductor Community Advisory Board (CAB)
 - Author of a Bioconductor package based on RCy3 (transomics2cytoscape)
 - Cytoscape community contributor (Google Summer of Code, Google Season of Docs)
