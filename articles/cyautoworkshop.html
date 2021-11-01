@@ -299,14 +299,7 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 <div id="example-use-cases" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-use-cases" class="anchor"></a>Example Use Cases</h2>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Omics data</strong> - I have a ———– fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?</li>
-<li>
-<strong>Coexpression data</strong> - I have a dataset that represents relationships. How do I represent it as a network.</li>
-<li>
-<strong>Omics data</strong> - I have a ———–fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. I have run my data through a functional enrichment tool and now have a set of enriched terms associated with my dataset. How do I represent my functional enrichments as a network?</li>
-</ol>
+<p><strong>Omics data</strong> - I have a ———– fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?</p>
 </div>
 <div id="example-data-set" class="section level2">
 <h2 class="hasAnchor">
@@ -318,13 +311,8 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 <li>RNA-seq read counts were converted to CPM values and genes with CPM &gt; 1 in at least 50 of the samples are retained for further study</li>
 <li>The data was normalized and differential expression was calculated for each cancer class relative to the rest of the samples.</li>
 </ul>
-<p>There are two data files:</p>
-<ol style="list-style-type: decimal">
-<li>
-<a href="https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt">Expression matrix</a> - containing the normalized expression for each gene across all 300 samples.</li>
-<li>
-<a href="https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt">Gene ranks</a> - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)</li>
-</ol>
+<p>There is a data file:</p>
+<p><a href="https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt">Gene ranks</a> - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RCurl</span><span class="op">)</span>
 <span class="va">matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCurl/man/getURL.html">getURL</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt"</span><span class="op">)</span>
