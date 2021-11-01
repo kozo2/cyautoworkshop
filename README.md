@@ -22,14 +22,15 @@ In this workshop, I will explain the basic usage of Cytoscape automation and mor
 You need to use [Google Colab](https://colab.research.google.com/) to run and reproduce the workshop material.
 You must have a Google account to access this.
 You also need to use [Cytoscape](https://cytoscape.org/download.html) in your local desktop environment in addition to Google Colab.
-Unlike other workshops, this workshop cannot be run only in a remote environment.
-You need to use a combination of remote Google Colab and local Cytoscape.
+Unlike other workshops, this workshop cannot be reproducible only with a remote environment.
+You need to use a combination of remote Google Colab **and local Cytoscape**.
 How to set them up will be described later.
 
 #### Disclaimer
-Unlike other workshops, this workshop does not use [the Orchestra platform](http://app.orchestra.cancerdatasci.org/).
-This is because my notebook is doing a browser hack using JavaScript.
-Currently that JavaScript doesn't work in Orchestra.
+Unlike the other BioC Asia workshops, this workshop does not use [the Orchestra platform](http://app.orchestra.cancerdatasci.org/).
+This is because my notebook is using JavaScript called Jupyter Bridge.
+Currently the Jupyter Bridge doesn't work in Orchestra.
+I will also explain about this later.
 
 However, an Orchestra-style workshop environment is also available **as long as it is within your local environment** rather than the Orchestra.
 ```
@@ -40,13 +41,21 @@ and visit http://localhost:8888 in your browser.
 ### Workshop Participation
 
 After the basic concepts of Cytoscape automation is introduced,
-students will be given the opportunity to reproduce more practical example workflow.
+students will be given the opportunity to reproduce basic and practical example workflow.
 
 ### Bioconductor packages used
 
-- RCy3
+- RCy3 2.13.9 or after
 
 This repository provides biologically relevant analyses using the [RCy3](https://bioconductor.org/packages/RCy3/) package.
+
+#### The other dependencies
+
+- Google Account
+- Google Chrome
+- Cytoscape 3.9.0 in your Desktop environment
+
+This workshop use Google Colab and Cytoscape (in your local desktop).
 
 ## Workshop goals and objectives
 
