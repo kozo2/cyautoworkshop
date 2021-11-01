@@ -224,15 +224,6 @@ We will use the following table as a result of the analysis to integrate it into
 
 ```{r}
 library(RCurl)
-matrix <- getURL("https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt")
-RNASeq_expression_matrix <- read.table(text=matrix, header = TRUE, sep = "\t", quote="\"", stringsAsFactors = FALSE)
-```
-
-```{r}
-RNASeq_expression_matrix
-```
-
-```{r}
 matrix <- getURL("https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt")
 RNASeq_gene_scores <- read.table(text=matrix, header = TRUE, sep = "\t", quote="\"", stringsAsFactors = FALSE)
 ```
@@ -243,27 +234,17 @@ RNASeq_gene_scores
 
 ## Use Case - How are my top genes related?
 
-Omics data - I have a -----------fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset.
-I have normalized and scored my data. How do I overlay my data on existing interaction data?
-
 There are endless amounts of databases storing interaction data.
 
 ![image](https://user-images.githubusercontent.com/12192/139541346-9e223e88-e6df-4e4d-b7f2-a5836f6e97eb.png)
 
-Get a subset of genes of interest from our scored data:
-
-```{r}
-top_mesenchymal_genes <- RNASeq_gene_scores[which(RNASeq_gene_scores$FDR.mesen < 0.05 & RNASeq_gene_scores$logFC.mesen > 2),]
-head(top_mesenchymal_genes)
-```
-
-We are going to query the String Database to get all interactions found for our set of top Mesenchymal genes.
+We are going to query the STRING Database to get all interactions found for our set of top Mesenchymal genes.
 
 ### Cytoscape Apps with network data
 Thankfully we don't have to query each independently.
 In addition to many specialized (for example, for specific molecules, interaction type, or species) interaction databases there are also databases that collate these databases to create a broad resource that is easier to use. For example:
 
-- [stringApp](https://apps.cytoscape.org/apps/stringapp) - is a protein-protein and protein-chemical database that imports data from [String(Szklarczyk et al.)](https://doi.org/10.1093/nar/gkaa1074), [STITCH] into a unified, queriable database.
+- [stringApp](https://apps.cytoscape.org/apps/stringapp) - is a protein-protein and protein-chemical database that imports data from [STRING(Szklarczyk et al.)](https://doi.org/10.1093/nar/gkaa1074), [STITCH] into a unified, queriable database.
 
 You can install apps in Cytoscape directly from R.
 
@@ -271,10 +252,20 @@ You can install apps in Cytoscape directly from R.
 installApp("stringApp")
 ```
 
+You can check it was successfully installed with:
+
+```{r}
+getAppStatus("stringApp")
+```
+
 ### Help on specific cytoscape command
 To get information about an individual command from the R environment you can also use the commandsHelp function.
 Simply specify what command you would like to get information on by adding its name to the command.
 For example “commandsHelp("help string”)“
+
+```{r}
+commandsHelp("help")
+```
 
 ```{r}
 commandsHelp("help string")
@@ -288,6 +279,13 @@ commandsHelp("help string protein query")
 mesen_string_interaction_cmd <- paste('string protein query taxonID=9606 limit=150 cutoff=0.9 query="',paste(top_mesenchymal_genes$Name, collapse=","),'"',sep="")
 commandsGET(mesen_string_interaction_cmd)
 ```
+
+- cutoff: The confidence score reflects the cumulated evidence that this interaction exists. Only interactions with scores greater than this cutoff will be returned.
+- limit: The maximum number of proteins to return in addition to the query set.
+- query: Comma separated list of protein names or identifiers.
+- taxonID: The species taxonomy ID. See the NCBI taxonomy home page for IDs. If both species and taxonID are set to a different species, the taxonID has priority.
+
+Please see Cytoscape menubar "Help -> Automation -> CyREST Commands API" for details.
 
 ```{r}
 exportImage("initial_string_network", type = "png")
@@ -333,13 +331,14 @@ response
 ```
 
 String network with new layout
+
 ![relayout_string_network](https://user-images.githubusercontent.com/12192/139554068-55353d6a-62e2-4956-b2c6-cda4cc5a28d8.png)
 
-## Overlay our expression data on the String network.
+## Overlay our expression analysis data on the STRING network
 
 To do this we will be using the loadTableData function from RCy3.
 It is important to make sure that that your identifiers types match up.
-You can check what is used by String by pulling in the column names of the node attribute table.
+You can check what is used by STRING by pulling in the column names of the node attribute table.
 
 ```{r}
 getTableColumnNames('node')
