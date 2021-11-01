@@ -45,9 +45,17 @@ students will be given the opportunity to reproduce basic and practical example 
 
 ### Bioconductor packages used
 
-- RCy3
+- RCy3 2.13.9 or after
 
 This repository provides biologically relevant analyses using the [RCy3](https://bioconductor.org/packages/RCy3/) package.
+
+#### The other dependencies
+
+- Google Account
+- Google Chrome
+- Cytoscape 3.9.0 in your Desktop environment
+
+This workshop use Google Colab and Cytoscape (in your local desktop).
 
 ## Workshop goals and objectives
 
