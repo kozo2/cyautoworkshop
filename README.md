@@ -51,9 +51,9 @@ This repository provides biologically relevant analyses using the [RCy3](https:/
 
 #### The other dependencies
 
-- Google Account
-- Google Chrome
-- Cytoscape 3.9.0 in your Desktop environment
+- Google Account (for using Google Colab)
+- Google Chrome (for using Jupyter Bridge)
+- Cytoscape 3.9.0 (**in your local Desktop environment**, not in remote environment)
 
 This workshop use Google Colab and Cytoscape (in your local desktop).
 
