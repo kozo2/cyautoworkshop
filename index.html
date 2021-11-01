@@ -72,86 +72,97 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="cytoscape-automation-with-rcy3" class="section level1">
+<div id="cytoscape-automation-with-rcy3-rcy3を用いたcytoscape-automation" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#cytoscape-automation-with-rcy3" class="anchor"></a>Cytoscape automation with RCy3</h1></div>
+<a href="#cytoscape-automation-with-rcy3-rcy3%E3%82%92%E7%94%A8%E3%81%84%E3%81%9Fcytoscape-automation" class="anchor"></a>Cytoscape automation with RCy3 (RCy3を用いたCytoscape automation)</h1></div>
 <div id="instructor" class="section level2">
 <h2 class="hasAnchor">
 <a href="#instructor" class="anchor"></a>Instructor</h2>
 <ul>
-<li>Kozo Nishida (<a href="mailto:kozo.nishida@gmail.com" class="email">kozo.nishida@gmail.com</a>)</li>
+<li>Kozo Nishida (<a href="mailto:kozo.nishida@gmail.com" class="email">kozo.nishida@gmail.com</a>) (西田 孝三)</li>
 </ul>
 </div>
-<div id="workshop-description" class="section level2">
+<div id="workshop-description-ワークショップの説明" class="section level2">
 <h2 class="hasAnchor">
-<a href="#workshop-description" class="anchor"></a>Workshop Description</h2>
-<p>Cytoscape is a network visualization platform. Recently, workflows using Cytoscape can be automatically executed from R or Python. This is important not only because it can be done automatically, but also because it allows you to take advantage of the rich data analysis packages of R or Python. In this workshop, I will explain the basic usage of Cytoscape automation and more practical usage.</p>
-<div id="prerequisites" class="section level3">
+<a href="#workshop-description-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97%E3%81%AE%E8%AA%AC%E6%98%8E" class="anchor"></a>Workshop Description (ワークショップの説明)</h2>
+<p>Cytoscape is a network visualization platform. (Cytoscapeはネットワーク視覚化プラットフォームです。)</p>
+<p>Recently, workflows using Cytoscape can be automatically executed from R or Python. (最近、Cytoscapeを使用したワークフローをRまたはPythonから自動的に実行できるようになりました。)</p>
+<p>This is important not only because it can be done automatically, but also because it allows you to take advantage of the rich data analysis packages of R or Python. (これは、自動的に実行できるだけでなく、RまたはPythonの豊富なデータ分析パッケージを利用できるため重要です。)</p>
+<p>In this workshop, I will explain the basic usage of Cytoscape automation and more practical usage. (このワークショップでは、Cytoscape automationの基本的な使用法とより実用的な使用法について説明します。)</p>
+<div id="prerequisites-前提条件" class="section level3">
 <h3 class="hasAnchor">
-<a href="#prerequisites" class="anchor"></a>Prerequisites</h3>
+<a href="#prerequisites-%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6" class="anchor"></a>Prerequisites (前提条件)</h3>
 <ul>
-<li>Basic knowledge of network and biology</li>
-<li>Basic knowledge of R</li>
+<li>Basic knowledge of network and biology (ネットワークと生物学の基礎知識)</li>
+<li>Basic knowledge of R (Rの基礎知識)</li>
 </ul>
 </div>
-<div id="preparation" class="section level3">
+<div id="preparation-準備" class="section level3">
 <h3 class="hasAnchor">
-<a href="#preparation" class="anchor"></a>Preparation</h3>
-<p>You need to use <a href="https://colab.research.google.com/">Google Colab</a> to run and reproduce the workshop material. You must have a Google account to access this. You also need to use <a href="https://cytoscape.org/download.html">Cytoscape</a> in your local desktop environment in addition to Google Colab. Unlike other workshops, this workshop cannot be reproducible only with a remote environment. You need to use a combination of remote Google Colab <strong>and local Cytoscape</strong>. How to set them up will be described later.</p>
-<div id="disclaimer" class="section level4">
-<h4 class="hasAnchor">
-<a href="#disclaimer" class="anchor"></a>Disclaimer</h4>
-<p>Unlike the other BioC Asia workshops, this workshop does not use <a href="http://app.orchestra.cancerdatasci.org/">the Orchestra platform</a>. This is because my notebook is using JavaScript called Jupyter Bridge. Currently the Jupyter Bridge doesn’t work in Orchestra. I will also explain about this later.</p>
-<p>However, an Orchestra-style workshop environment is also available <strong>as long as it is within your local environment</strong> rather than the Orchestra.</p>
+<a href="#preparation-%E6%BA%96%E5%82%99" class="anchor"></a>Preparation (準備)</h3>
+<p>You need to use <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a> to run and reproduce the workshop material. (ワークショップの資料を実行および複製するには、<a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>を使用する必要があります。)</p>
+<p>You also need to use <a href="https://cytoscape.org/download.html">Cytoscape</a> in your local desktop environment in addition to Docker. (Dockerに加えて、ローカルデスクトップ環境でも[Cytoscape]（<a href="https://cytoscape.org/download.html%EF%BC%89%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E5%BF%85%E8%A6%81%E3%81%8C%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99" class="uri">https://cytoscape.org/download.html）を使用する必要があります</a>。)</p>
+<p>Unlike other workshops, this workshop cannot be reproducible with <a href="http://app.orchestra.cancerdatasci.org/">Orchestra</a>. (他のワークショップとは異なり、このワークショップは<a href="http://app.orchestra.cancerdatasci.org/">Orchestra</a>では再現できません。</p>
+<p>And You need Google Chrome. My workshop does not work with Safari. (またあなたはGoogle Chromeを必要とします。私のワークショップはSafariでは動きません。)</p>
+<p>How to set them up will be described later. (それらの設定方法については、後で説明します。)</p>
+</div>
+<div id="how-to-use-the-docker-environment" class="section level3">
+<h3 class="hasAnchor">
+<a href="#how-to-use-the-docker-environment" class="anchor"></a>How to use the Docker environment</h3>
+<ol>
+<li><p>Install <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>. (Dockerのデスクトップ版をインストールします。)</p></li>
+<li><p>Run the command below. (下のコマンドを実行します。)</p></li>
+</ol>
 <pre><code>docker run -d -p 8888:8888 kozo2/cyautoworkshop</code></pre>
-<p>and visit <a href="http://localhost:8888" class="uri">http://localhost:8888</a> in your browser.</p>
+<ol>
+<li>Open <a href="http://localhost:8888" class="uri">http://localhost:8888</a> with Chrome. (Chromeで localhost:8888 を開きます。)</li>
+</ol>
 </div>
-</div>
-<div id="workshop-participation" class="section level3">
+<div id="workshop-participation-ワークショップへの参加" class="section level3">
 <h3 class="hasAnchor">
-<a href="#workshop-participation" class="anchor"></a>Workshop Participation</h3>
-<p>After the basic concepts of Cytoscape automation is introduced, students will be given the opportunity to reproduce basic and practical example workflow.</p>
+<a href="#workshop-participation-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97%E3%81%B8%E3%81%AE%E5%8F%82%E5%8A%A0" class="anchor"></a>Workshop Participation (ワークショップへの参加)</h3>
+<p>After the basic concepts of Cytoscape automation is introduced, (Cytoscape自動化の基本概念が導入された後、)</p>
+<p>students will be given the opportunity to reproduce basic and practical example workflow. (学生には、基本的そして実用的なワークフローの例を再現する機会が与えられます。)</p>
 </div>
-<div id="bioconductor-packages-used" class="section level3">
+<div id="bioconductor-packages-used-用いる-bioconductor-パッケージ" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bioconductor-packages-used" class="anchor"></a>Bioconductor packages used</h3>
+<a href="#bioconductor-packages-used-%E7%94%A8%E3%81%84%E3%82%8B-bioconductor-%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8" class="anchor"></a>Bioconductor packages used (用いる Bioconductor パッケージ)</h3>
 <ul>
 <li>RCy3 2.13.9 or after</li>
 </ul>
-<p>This repository provides biologically relevant analyses using the <a href="https://bioconductor.org/packages/RCy3/">RCy3</a> package.</p>
-<div id="the-other-dependencies" class="section level4">
+<p>This repository provides biologically relevant analyses using the <a href="https://bioconductor.org/packages/RCy3/">RCy3</a> package. (このリポジトリは、RCy3 Bioconductor パッケージを使用して生物学的に関連する分析を提供します。)</p>
+<div id="the-other-dependencies-その他の依存" class="section level4">
 <h4 class="hasAnchor">
-<a href="#the-other-dependencies" class="anchor"></a>The other dependencies</h4>
+<a href="#the-other-dependencies-%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E4%BE%9D%E5%AD%98" class="anchor"></a>The other dependencies (その他の依存)</h4>
 <ul>
-<li>Google Account (for using Google Colab)</li>
+<li>Docker Desktop</li>
 <li>Google Chrome (for using Jupyter Bridge)</li>
 <li>Cytoscape 3.9.0 (<strong>in your local Desktop environment</strong>, not in remote environment)</li>
 </ul>
-<p>This workshop use Google Colab and Cytoscape (in your local desktop).</p>
 </div>
 </div>
 </div>
-<div id="workshop-goals-and-objectives" class="section level2">
+<div id="workshop-goals-and-objectives-ワークショップの目標と目的" class="section level2">
 <h2 class="hasAnchor">
-<a href="#workshop-goals-and-objectives" class="anchor"></a>Workshop goals and objectives</h2>
-<div id="learning-goals" class="section level3">
+<a href="#workshop-goals-and-objectives-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97%E3%81%AE%E7%9B%AE%E6%A8%99%E3%81%A8%E7%9B%AE%E7%9A%84" class="anchor"></a>Workshop goals and objectives (ワークショップの目標と目的)</h2>
+<div id="learning-goals-学習目標" class="section level3">
 <h3 class="hasAnchor">
-<a href="#learning-goals" class="anchor"></a>Learning goals</h3>
+<a href="#learning-goals-%E5%AD%A6%E7%BF%92%E7%9B%AE%E6%A8%99" class="anchor"></a>Learning goals (学習目標)</h3>
 <ul>
-<li>Understand network data structures in Cytoscape</li>
-<li>Understand how Cytoscape automation works</li>
-<li>Know how to translate R data into Cytoscape network</li>
-<li>Know how to querying the interaction database and getting it into Cytoscape</li>
-<li>Know how to overlay expression analysis results on the interaction network</li>
+<li>Understand network data structures in Cytoscape (Cytoscapeのネットワークデータ構造を理解する)</li>
+<li>Understand how Cytoscape automation works (Cytoscapeの自動化がどのように機能するかを理解する)</li>
+<li>Know how to translate R data into Cytoscape network (RデータをCytoscapeネットワークに変換する方法を知る)</li>
+<li>Know how to querying the interaction database and getting it into Cytoscape (インタラクションデータベースにクエリを実行し、Cytoscapeに取り込む方法を知る)</li>
+<li>Know how to overlay expression analysis results on the interaction network (相互作用ネットワークに発現解析結果をオーバーレイする方法を知る)</li>
 </ul>
 </div>
-<div id="learning-objectives" class="section level3">
+<div id="learning-objectives-学習対象" class="section level3">
 <h3 class="hasAnchor">
-<a href="#learning-objectives" class="anchor"></a>Learning objectives</h3>
+<a href="#learning-objectives-%E5%AD%A6%E7%BF%92%E5%AF%BE%E8%B1%A1" class="anchor"></a>Learning objectives (学習対象)</h3>
 <ul>
-<li>Be able to automate local Cytoscape operations from Google Colab R</li>
-<li>Be able to control Cytoscape from RCy3 packages</li>
-<li>Be able to integrate R table data into Cytoscape network (node or edge) tables</li>
+<li>Be able to automate local Cytoscape operations from R Jupyter (RのJupyterからローカルのCytoscape操作を自動化できる)</li>
+<li>Be able to control Cytoscape from RCy3 packages (RCy3パッケージからCytoscapeを制御できる)</li>
+<li>Be able to integrate R table data into Cytoscape network (node or edge) tables (RのテーブルデータをCytoscapeネットワーク（ノードまたはエッジ）テーブルに統合できる)</li>
 </ul>
 </div>
 </div>
