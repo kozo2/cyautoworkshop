@@ -318,53 +318,55 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RCurl</span><span class="op">)</span>
-<span class="va">matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCurl/man/getURL.html">getURL</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt"</span><span class="op">)</span>
-<span class="va">RNASeq_expression_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">matrix</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">"\t"</span>, quote<span class="op">=</span><span class="st">"\""</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">RNASeq_expression_matrix</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCurl/man/getURL.html">getURL</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt"</span><span class="op">)</span>
+<span class="va">matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCurl/man/getURL.html">getURL</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt"</span><span class="op">)</span>
 <span class="va">RNASeq_gene_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">matrix</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">"\t"</span>, quote<span class="op">=</span><span class="st">"\""</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RNASeq_gene_scores</span></code></pre></div>
 </div>
 <div id="use-case---how-are-my-top-genes-related" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use-case---how-are-my-top-genes-related" class="anchor"></a>Use Case - How are my top genes related?</h2>
-<p>Omics data - I have a ———–fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?</p>
 <p>There are endless amounts of databases storing interaction data.</p>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139541346-9e223e88-e6df-4e4d-b7f2-a5836f6e97eb.png" alt=""><p class="caption">image</p>
 </div>
-<p>Get a subset of genes of interest from our scored data:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">top_mesenchymal_genes</span> <span class="op">&lt;-</span> <span class="va">RNASeq_gene_scores</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">FDR.mesen</span> <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="op">&amp;</span> <span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">logFC.mesen</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span>,<span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">top_mesenchymal_genes</span><span class="op">)</span></code></pre></div>
-<p>We are going to query the String Database to get all interactions found for our set of top Mesenchymal genes.</p>
+<p>We are going to query the STRING Database to get all interactions found for our set of top Mesenchymal genes.</p>
 <div id="cytoscape-apps-with-network-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cytoscape-apps-with-network-data" class="anchor"></a>Cytoscape Apps with network data</h3>
 <p>Thankfully we don’t have to query each independently. In addition to many specialized (for example, for specific molecules, interaction type, or species) interaction databases there are also databases that collate these databases to create a broad resource that is easier to use. For example:</p>
 <ul>
 <li>
-<a href="https://apps.cytoscape.org/apps/stringapp">stringApp</a> - is a protein-protein and protein-chemical database that imports data from <a href="https://doi.org/10.1093/nar/gkaa1074">String(Szklarczyk et al.)</a>, [STITCH] into a unified, queriable database.</li>
+<a href="https://apps.cytoscape.org/apps/stringapp">stringApp</a> - is a protein-protein and protein-chemical database that imports data from <a href="https://doi.org/10.1093/nar/gkaa1074">STRING(Szklarczyk et al.)</a>, [STITCH] into a unified, queriable database.</li>
 </ul>
 <p>You can install apps in Cytoscape directly from R.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/installApp.html">installApp</a></span><span class="op">(</span><span class="st">"stringApp"</span><span class="op">)</span></code></pre></div>
+<p>You can check it was successfully installed with:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getAppStatus.html">getAppStatus</a></span><span class="op">(</span><span class="st">"stringApp"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="help-on-specific-cytoscape-command" class="section level3">
 <h3 class="hasAnchor">
 <a href="#help-on-specific-cytoscape-command" class="anchor"></a>Help on specific cytoscape command</h3>
 <p>To get information about an individual command from the R environment you can also use the commandsHelp function. Simply specify what command you would like to get information on by adding its name to the command. For example “commandsHelp(”help string”)“</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help string"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help string protein query"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mesen_string_interaction_cmd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">'string protein query taxonID=9606 limit=150 cutoff=0.9 query="'</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">top_mesenchymal_genes</span><span class="op">$</span><span class="va">Name</span>, collapse<span class="op">=</span><span class="st">","</span><span class="op">)</span>,<span class="st">'"'</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsGET.html">commandsGET</a></span><span class="op">(</span><span class="va">mesen_string_interaction_cmd</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<ul>
+<li>cutoff: The confidence score reflects the cumulated evidence that this interaction exists. Only interactions with scores greater than this cutoff will be returned.</li>
+<li>limit: The maximum number of proteins to return in addition to the query set.</li>
+<li>query: Comma separated list of protein names or identifiers.</li>
+<li>taxonID: The species taxonomy ID. See the NCBI taxonomy home page for IDs. If both species and taxonID are set to a different species, the taxonID has priority.</li>
+</ul>
+<p>Please see Cytoscape menubar “Help -&gt; Automation -&gt; CyREST Commands API” for details.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/exportImage.html">exportImage</a></span><span class="op">(</span><span class="st">"initial_string_network"</span>, type <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139543384-b19ac0f3-1dc9-4e6d-a212-af4f19ab6529.png" alt=""><p class="caption">initial_string_network</p>
@@ -374,41 +376,44 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 <h3 class="hasAnchor">
 <a href="#layouts" class="anchor"></a>Layouts</h3>
 <p>Layout the network</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/layoutNetwork.html">layoutNetwork</a></span><span class="op">(</span><span class="st">'force-directed'</span><span class="op">)</span></code></pre></div>
 <p>Check what other layout algorithms are available to try out</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getLayoutNames.html">getLayoutNames</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="layouts---contd" class="section level3">
 <h3 class="hasAnchor">
 <a href="#layouts---contd" class="anchor"></a>Layouts - cont’d</h3>
 <p>Get the parameters for a specific layout</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getLayoutPropertyNames.html">getLayoutPropertyNames</a></span><span class="op">(</span>layout.name<span class="op">=</span><span class="st">'force-directed'</span><span class="op">)</span></code></pre></div>
 <p>Re-layout the network using the force directed layout but specify some of the parameters</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/layoutNetwork.html">layoutNetwork</a></span><span class="op">(</span><span class="st">'force-directed defaultSpringCoefficient=0.0000008 defaultSpringLength=70'</span><span class="op">)</span></code></pre></div>
 <p>Get a screenshot of the re-laid out network</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">response</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/exportImage.html">exportImage</a></span><span class="op">(</span><span class="st">"relayout_string_network"</span>, type <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">response</span></code></pre></div>
-<p>String network with new layout <img src="https://user-images.githubusercontent.com/12192/139554068-55353d6a-62e2-4956-b2c6-cda4cc5a28d8.png" alt="relayout_string_network"></p>
+<p>String network with new layout</p>
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/12192/139554068-55353d6a-62e2-4956-b2c6-cda4cc5a28d8.png" alt=""><p class="caption">relayout_string_network</p>
 </div>
 </div>
-<div id="overlay-our-expression-data-on-the-string-network-" class="section level2">
+</div>
+<div id="overlay-our-expression-analysis-data-on-the-string-network" class="section level2">
 <h2 class="hasAnchor">
-<a href="#overlay-our-expression-data-on-the-string-network-" class="anchor"></a>Overlay our expression data on the String network.</h2>
-<p>To do this we will be using the loadTableData function from RCy3. It is important to make sure that that your identifiers types match up. You can check what is used by String by pulling in the column names of the node attribute table.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<a href="#overlay-our-expression-analysis-data-on-the-string-network" class="anchor"></a>Overlay our expression analysis data on the STRING network</h2>
+<p>To do this we will be using the loadTableData function from RCy3. It is important to make sure that that your identifiers types match up. You can check what is used by STRING by pulling in the column names of the node attribute table.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getTableColumnNames.html">getTableColumnNames</a></span><span class="op">(</span><span class="st">'node'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="overlay-our-expression-data-on-the-string-network---contd" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overlay-our-expression-data-on-the-string-network---contd" class="anchor"></a>Overlay our expression data on the String network - cont’d</h2>
 <p>If you are unsure of what each column is and want to further verify the column to use you can also pull in the entire node attribute table.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">node_attribute_table_topmesen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getTableColumns.html">getTableColumns</a></span><span class="op">(</span>table<span class="op">=</span><span class="st">"node"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">node_attribute_table_topmesen</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="figure">
@@ -416,7 +421,7 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 </div>
 <p>The column “display name” contains HGNC gene names which are also found in our Ovarian Cancer dataset.</p>
 <p>To import our expression data we will match our dataset to the “display name” node attribute.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/loadTableData.html">loadTableData</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span>, table.key.column <span class="op">=</span> <span class="st">"display name"</span>, data.key.column <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span>  <span class="co">#default data.frame key is row.names</span></code></pre></div>
 </div>
 <div id="visual-style" class="section level2">
