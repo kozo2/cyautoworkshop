@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   cyautoworkshop: cyautoworkshop.html
-last_built: 2021-11-01T05:37Z
+last_built: 2021-11-01T05:38Z
 urls:
   reference: https://kozo2.github.io/cyautoworkshop/reference
   article: https://kozo2.github.io/cyautoworkshop/articles

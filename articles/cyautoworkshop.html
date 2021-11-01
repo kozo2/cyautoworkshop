@@ -296,14 +296,14 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 <div id="main-workshop-more-practical" class="section level1">
 <h1 class="hasAnchor">
 <a href="#main-workshop-more-practical" class="anchor"></a>Main workshop (more practical)</h1>
-<div id="example-use-cases" class="section level2">
+<div id="example-use-case" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-use-cases" class="anchor"></a>Example Use Cases</h2>
+<a href="#example-use-case" class="anchor"></a>Example Use Case</h2>
 <p><strong>Omics data</strong> - I have a ———– fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?</p>
 </div>
-<div id="example-data-set" class="section level2">
+<div id="the-example-data-set" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-data-set" class="anchor"></a>Example Data Set</h2>
+<a href="#the-example-data-set" class="anchor"></a>The example data set</h2>
 <p>We downloaded gene expression data from the Ovarian Serous Cystadenocarcinoma project of The Cancer Genome Atlas (TCGA)(International Genome et al.), <a href="http://cancergenome.nih.gov" class="uri">http://cancergenome.nih.gov</a> via the Genomic Data Commons (GDC) portal(Grossman et al.) on 2017-06-14 using <a href="http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html">TCGABiolinks Bioconductor package(Colaprico et al.)</a>.</p>
 <ul>
 <li>300 samples available as RNA-seq data</li>
@@ -311,8 +311,11 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 <li>RNA-seq read counts were converted to CPM values and genes with CPM &gt; 1 in at least 50 of the samples are retained for further study</li>
 <li>The data was normalized and differential expression was calculated for each cancer class relative to the rest of the samples.</li>
 </ul>
-<p>There is a data file:</p>
-<p><a href="https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt">Gene ranks</a> - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)</p>
+<p>We will use the following table as a result of the analysis to integrate it into a interaction network:</p>
+<ul>
+<li>
+<a href="https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt">Gene ranks</a> - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)</li>
+</ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RCurl</span><span class="op">)</span>
 <span class="va">matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCurl/man/getURL.html">getURL</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/cytoscape/cytoscape-tutorials/gh-pages/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_expression.txt"</span><span class="op">)</span>
