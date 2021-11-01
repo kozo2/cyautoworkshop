@@ -200,47 +200,47 @@
 </div>
 <p><a href="https://f1000research.com/articles/8-1774">RCy3: Network biology using Cytoscape from within R. F1000Research 2019.</a></p>
 </div>
-<div id="translating-r-data-into-a-cytoscape-network-using-rcy3" class="section level2">
+<div id="rcy3を使用してrのデータをcytoscapeネットワークに変換する" class="section level2">
 <h2 class="hasAnchor">
-<a href="#translating-r-data-into-a-cytoscape-network-using-rcy3" class="anchor"></a>Translating R data into a Cytoscape network using RCy3</h2>
-<p>Networks offer us a useful way to represent our biological data. But how do we seamlessly translate our data from R into Cytoscape?</p>
+<a href="#rcy3%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6r%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92cytoscape%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B" class="anchor"></a>RCy3を使用してRのデータをCytoscapeネットワークに変換する</h2>
+<p>ネットワークは、生物学的データを表すための便利な方法を提供してくれます。 しかし、データをRからCytoscapeにシームレスに変換するにはどうすればよいでしょうか?</p>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139404069-536a67a2-e8fe-4072-bc42-74bfb060f924.png" alt=""><p class="caption">image</p>
 </div>
-<p>From here it finally becomes hands-on using Google Colab. Aside from the details, let’s connect Google Colab to local Cytoscape.</p>
-<p>Make sure your local Cytoscape is fully up and running before running the code below. It will take some time for Cytoscape to start up and its REST server to start up completely. (Please wait for about 10 seconds.)</p>
+<p>ここからいよいよハンズオンです。細かいことはおいておいてとにかくRとCytoscapeを接続しましょう。</p>
+<p>以下のコードを実行する前に、ローカルのCytoscapeが完全に起動しきっていることを確認してください。 Cytoscapeが起動し、RESTサーバーが完全に起動するまでには少し時間がかかります。 (大体10秒くらい待ちます。)</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cytoscape/RCy3">RCy3</a></span><span class="op">)</span>
 <span class="va">browserClientJs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getBrowserClientJs.html">getBrowserClientJs</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu">IRdisplay</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/IRdisplay/man/display-textual.html">display_javascript</a></span><span class="op">(</span><span class="va">browserClientJs</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/cytoscapePing.html">cytoscapePing</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div id="why-was-the-remote-google-colab-able-to-communicate-with-the-local-cytoscape-rest-service" class="section level3">
+<div id="なぜ-jupyter-が-cytoscape-の-rest-サービスと通信できたのですか" class="section level3">
 <h3 class="hasAnchor">
-<a href="#why-was-the-remote-google-colab-able-to-communicate-with-the-local-cytoscape-rest-service" class="anchor"></a>Why was the remote Google Colab able to communicate with the local Cytoscape REST service?</h3>
-<p>We need a detailed description of what happened in</p>
+<a href="#%E3%81%AA%E3%81%9C-jupyter-%E3%81%8C-cytoscape-%E3%81%AE-rest-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E9%80%9A%E4%BF%A1%E3%81%A7%E3%81%8D%E3%81%9F%E3%81%AE%E3%81%A7%E3%81%99%E3%81%8B" class="anchor"></a>なぜ Jupyter が Cytoscape の REST サービスと通信できたのですか？</h3>
+<p>下記で何が起こったのかについての詳細な説明が必要ですね。</p>
 <pre><code>browserClientJs &lt;- getBrowserClientJs()
 IRdisplay::display_javascript(browserClientJs)</code></pre>
-<p>We used a technology called <strong>Jupyter Bridge</strong> in the above code. Jupyter Bridge is a JavaScript implementation that makes HTTP requests from a remote REST client look like local requests.</p>
+<p>上記のコードでは、<strong>Jupyter Bridge</strong> と呼ばれるテクノロジーを使用しました。 Jupyter Bridgeは、リモートの REST クライアントからの HTTP リクエストをローカルリクエストのように見せかける JavaScript 実装です。</p>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139530994-8afd99b2-1175-46b3-9ad7-166d8ba78f2a.png" alt=""><p class="caption">image</p>
 </div>
-<p>Since it is difficult to access Cytoscape in the desktop environment from a remote environment, we use Jupyter Bridge.</p>
-<p>And since I couldn’t get Jupyter Bridge to work in the Orchestra environment, this workshop is exceptionally using Google Colab instead of Orchestra.</p>
-<p>If you have RCy3 installed locally instead of remotely like Google Colab, you don’t need to use this Jupyter Bridge technology.</p>
+<p>デスクトップ環境内のCytoscapeにリモート環境からアクセスするのは難しいため、Jupyter Bridgeを使用します。</p>
+<p>そしてこのワークショップが他のワークショップと違って <a href="http://app.orchestra.cancerdatasci.org/">Orchestra</a> で動かなかったのは この Jupyter Bridge のせいでもあります。</p>
+<p>そのため私はローカルの Docker 環境内の Jupyter で Jupyter Bridge を使いました。 ローカルでなくても Orchestra でないリモートサーバーで私の Docker イメージを使うなら問題無く動作します。</p>
 </div>
-<div id="then-why-use-jupyter-bridge" class="section level3">
+<div id="で-なぜ-jupyter-bridge-を使うのですか-ややこしくないですか-ノートブックを使わなければよいのではないですか" class="section level3">
 <h3 class="hasAnchor">
-<a href="#then-why-use-jupyter-bridge" class="anchor"></a>(Then) Why use Jupyter Bridge?</h3>
+<a href="#%E3%81%A7-%E3%81%AA%E3%81%9C-jupyter-bridge-%E3%82%92%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%A7%E3%81%99%E3%81%8B-%E3%82%84%E3%82%84%E3%81%93%E3%81%97%E3%81%8F%E3%81%AA%E3%81%84%E3%81%A7%E3%81%99%E3%81%8B-%E3%83%8E%E3%83%BC%E3%83%88%E3%83%96%E3%83%83%E3%82%AF%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%91%E3%82%8C%E3%81%B0%E3%82%88%E3%81%84%E3%81%AE%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84%E3%81%A7%E3%81%99%E3%81%8B" class="anchor"></a>(で) なぜ Jupyter Bridge を使うのですか? ややこしくないですか? ノートブックを使わなければよいのではないですか?</h3>
 <ul>
-<li>Users do not need to worry about dependencies and environment.</li>
-<li>Easily share notebook-based workflows and data sets</li>
-<li>Workflows can reside in the cloud, access cloud resources, and yet still use Cytoscape features.</li>
+<li>ユーザーは依存関係や環境について心配する必要が無いからです。</li>
+<li>ノートブックベースのワークフローとデータセットを簡単に共有できるからです。</li>
+<li>ワークフローはクラウドに常駐し、クラウドリソースにアクセスし、それでもCytoscape機能を使用できるところがよいのです。</li>
 </ul>
 </div>
-<div id="lets-go-back-to-how-to-translate-r-data-into-a-cytoscape-network" class="section level3">
+<div id="rデータをcytoscapeネットワークに変換する方法に戻りましょう" class="section level3">
 <h3 class="hasAnchor">
-<a href="#lets-go-back-to-how-to-translate-r-data-into-a-cytoscape-network" class="anchor"></a>Let’s go back to how to translate R data into a Cytoscape network…</h3>
-<p>Create a Cytoscape network from some basic R objects</p>
+<a href="#r%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92cytoscape%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%AB%E6%88%BB%E3%82%8A%E3%81%BE%E3%81%97%E3%82%87%E3%81%86" class="anchor"></a>RデータをCytoscapeネットワークに変換する方法に戻りましょう…</h3>
+<p>いくつかの基本的なRオブジェクトからCytoscapeネットワークを作成します</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"node 0"</span>,<span class="st">"node 1"</span>,<span class="st">"node 2"</span>,<span class="st">"node 3"</span><span class="op">)</span>,
     group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>,<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"B"</span><span class="op">)</span>, <span class="co"># categorical strings</span>
@@ -251,26 +251,26 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
     interaction<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"inhibits"</span>,<span class="st">"interacts"</span>,<span class="st">"activates"</span>,<span class="st">"interacts"</span><span class="op">)</span>,  <span class="co"># optional</span>
     weight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5.1</span>,<span class="fl">3.0</span>,<span class="fl">5.2</span>,<span class="fl">9.9</span><span class="op">)</span>, <span class="co"># numeric</span>
     stringsAsFactors<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<div id="data-frame-used-to-create-network" class="section level4">
+<div id="ネットワークの作成に使用されるデータフレーム" class="section level4">
 <h4 class="hasAnchor">
-<a href="#data-frame-used-to-create-network" class="anchor"></a>Data frame used to create Network</h4>
+<a href="#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E4%BD%9C%E6%88%90%E3%81%AB%E4%BD%BF%E7%94%A8%E3%81%95%E3%82%8C%E3%82%8B%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0" class="anchor"></a>ネットワークの作成に使用されるデータフレーム</h4>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139534280-0c569dfd-d66d-4054-9b58-becce79225bc.png" alt=""><p class="caption">image</p>
 </div>
 </div>
-<div id="create-network" class="section level4">
+<div id="さあrcy3からネットワークを作りましょう" class="section level4">
 <h4 class="hasAnchor">
-<a href="#create-network" class="anchor"></a>Create Network</h4>
+<a href="#%E3%81%95%E3%81%82rcy3%E3%81%8B%E3%82%89%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%92%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%97%E3%82%87%E3%81%86" class="anchor"></a>さあ、RCy3からネットワークを作りましょう</h4>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/createNetworkFromDataFrames.html">createNetworkFromDataFrames</a></span><span class="op">(</span><span class="va">nodes</span>, <span class="va">edges</span>, title<span class="op">=</span><span class="st">"my first network"</span>, collection<span class="op">=</span><span class="st">"DataFrame Example"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="export-an-image-of-the-network" class="section level4">
+<div id="ネットワークの画像をエクスポートしましょう" class="section level4">
 <h4 class="hasAnchor">
-<a href="#export-an-image-of-the-network" class="anchor"></a>Export an image of the network</h4>
-<p>Remember. All networks we make are created in Cytoscape so get an image of the resulting network and include it in your current analysis if desired.</p>
+<a href="#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E7%94%BB%E5%83%8F%E3%82%92%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88%E3%81%97%E3%81%BE%E3%81%97%E3%82%87%E3%81%86" class="anchor"></a>ネットワークの画像をエクスポートしましょう</h4>
+<p>大部分の人の目的はCytoscapeの画を論文のFigureに使うことでしょう。 ですので画像を取得する方法が知りたいでしょう。</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/exportImage.html">exportImage</a></span><span class="op">(</span><span class="st">"my_first_network"</span>, type <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span></code></pre></div>
-<p>Initial simple network</p>
+<p>入門編のシンプルなネットワーク</p>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139537190-1f79f871-5dbd-4779-9a4f-7c67f263101b.png" alt=""><p class="caption">image</p>
 </div>
@@ -278,17 +278,17 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 </div>
 </div>
 </div>
-<div id="main-workshop-more-practical" class="section level1">
+<div id="ワークショップ-実践編" class="section level1">
 <h1 class="hasAnchor">
-<a href="#main-workshop-more-practical" class="anchor"></a>Main workshop (more practical)</h1>
-<div id="example-use-case" class="section level2">
+<a href="#%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97-%E5%AE%9F%E8%B7%B5%E7%B7%A8" class="anchor"></a>ワークショップ (実践編)</h1>
+<div id="ユースケースの例" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-use-case" class="anchor"></a>Example Use Case</h2>
-<p><strong>Omics data</strong> - I have a ———– fill in the blank (microarray, RNASeq, Proteomics, ATACseq, MicroRNA, GWAS …) dataset. I have normalized and scored my data. How do I overlay my data on existing interaction data?</p>
+<a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9%E3%81%AE%E4%BE%8B" class="anchor"></a>ユースケースの例</h2>
+<p><strong>オミックスデータ</strong> - 私は ほげほげ (microarray, RNASeq, Metabolomics, Proteomics, ATACseq, MicroRNA, GWAS …) データを持っています。 データをそれを何らかの解析をしてスコアリングしました。 データを既存のインタラクションデータ(PPI, パスウェイ, その他何か)にオーバーレイするにはどうすればよいですか?</p>
 </div>
-<div id="the-example-data-set" class="section level2">
+<div id="サンプルデータセット" class="section level2">
 <h2 class="hasAnchor">
-<a href="#the-example-data-set" class="anchor"></a>The example data set</h2>
+<a href="#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88" class="anchor"></a>サンプルデータセット</h2>
 <p>We downloaded gene expression data from the Ovarian Serous Cystadenocarcinoma project of The Cancer Genome Atlas (TCGA)(International Genome et al.), <a href="http://cancergenome.nih.gov" class="uri">http://cancergenome.nih.gov</a> via the Genomic Data Commons (GDC) portal(Grossman et al.) on 2017-06-14 using <a href="http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html">TCGABiolinks Bioconductor package(Colaprico et al.)</a>.</p>
 <ul>
 <li>300 samples available as RNA-seq data</li>
