@@ -172,11 +172,19 @@ nodes <- data.frame(id=c("node 0","node 1","node 2","node 3"),
     group=c("A","A","B","B"), # categorical strings
     score=as.integer(c(20,10,15,5)), # integers
     stringsAsFactors=FALSE)
+```
+```{r}
+nodes
+```
+```{r}
 edges <- data.frame(source=c("node 0","node 0","node 0","node 2"),
     target=c("node 1","node 2","node 3","node 3"),
     interaction=c("inhibits","interacts","activates","interacts"),  # optional
     weight=c(5.1,3.0,5.2,9.9), # numeric
     stringsAsFactors=FALSE)
+```
+```{r}
+edges
 ```
 
 #### Data frame used to create Network
@@ -230,6 +238,11 @@ RNASeq_gene_scores <- read.table(text=matrix, header = TRUE, sep = "\t", quote="
 
 ```{r}
 RNASeq_gene_scores
+```
+
+```{r}
+top_mesenchymal_genes <- RNASeq_gene_scores[which(RNASeq_gene_scores$FDR.mesen < 0.05 & RNASeq_gene_scores$logFC.mesen > 2),]
+head(top_mesenchymal_genes)
 ```
 
 ## Use Case - How are my top genes related?
