@@ -206,14 +206,17 @@ exportImage("my_first_network", type = "png")
 We downloaded gene expression data from the Ovarian Serous Cystadenocarcinoma project of The Cancer Genome Atlas (TCGA)(International Genome et al.),
 http://cancergenome.nih.gov via the Genomic Data Commons (GDC) portal(Grossman et al.) on 2017-06-14 using [TCGABiolinks Bioconductor package(Colaprico et al.)](http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html).
 
-- 300 samples available as RNA-seq data
-- 79 classified as Immunoreactive, 72 classified as Mesenchymal, 69 classified as Differentiated, and 80 classified as Proliferative samples
-- RNA-seq read counts were converted to CPM values and genes with CPM > 1 in at least 50 of the samples are retained for further study
-- The data was normalized and differential expression was calculated for each cancer class relative to the rest of the samples.
+The Cancer Genome Atlas (TCGA)(International Genome et al.) の the Ovarian Serous Cystadenocarcinoma プロジェクトから遺伝子発現データをダウンロードしました。
+http://cancergenome.nih.gov
+それには2017年6月14日に [TCGABiolinks Bioconductor package(Colaprico et al.)](http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html). を用いて  the Genomic Data Commons (GDC) portal(Grossman et al.) 由来でデータを取得しました。
 
-We will use the following table as a result of the analysis to integrate it into a interaction network:
+- RNA-seq データとして利用可能な300サンプル
+- 79サンプルは Immunoreactive として, 72サンプルは Mesenchymal として, 69サンプルは Differentiated として, そして80サンプルは Proliferative サンプルとして分類されています。
+- データは正規化され、残りのサンプルと比較して各癌クラスのdifferential expressionが計算されています。
 
-- [Gene ranks](https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt) - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)
+分析の結果として次の表を使用して、相互作用ネットワークに統合します:
+
+- [Gene ranks](https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt) - 4種の比較(mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)に対する p-value, FDR そして foldchange の値を含んだ解析結果の行列です。
 
 ```{r}
 library(RCurl)
@@ -225,36 +228,43 @@ RNASeq_gene_scores <- read.table(text=matrix, header = TRUE, sep = "\t", quote="
 RNASeq_gene_scores
 ```
 
-## Use Case - How are my top genes related?
+```{r}
+top_mesenchymal_genes <- RNASeq_gene_scores[which(RNASeq_gene_scores$FDR.mesen < 0.05 & RNASeq_gene_scores$logFC.mesen > 2),]
+head(top_mesenchymal_genes)
+```
 
-There are endless amounts of databases storing interaction data.
+## ユースケース-私の上位の遺伝子はどのように関連していますか？
+
+相互作用データを格納しているデータベースは無限にあります。
 
 ![image](https://user-images.githubusercontent.com/12192/139541346-9e223e88-e6df-4e4d-b7f2-a5836f6e97eb.png)
 
-We are going to query the STRING Database to get all interactions found for our set of top Mesenchymal genes.
+STRINGデータベースにクエリを実行して、トップのMesenchymalの遺伝子のセットに対して見つかったすべての相互作用を取得します。
 
-### Cytoscape Apps with network data
-Thankfully we don't have to query each independently.
-In addition to many specialized (for example, for specific molecules, interaction type, or species) interaction databases there are also databases that collate these databases to create a broad resource that is easier to use. For example:
+### ネットワークデータを使用した Cytoscape Apps
 
-- [stringApp](https://apps.cytoscape.org/apps/stringapp) - is a protein-protein and protein-chemical database that imports data from [STRING(Szklarczyk et al.)](https://doi.org/10.1093/nar/gkaa1074), [STITCH] into a unified, queriable database.
+ありがたいことに、遺伝子それぞれを個別にクエリする必要はありません。
 
-You can install apps in Cytoscape directly from R.
+多くの特殊な（たとえば、特定の分子、相互作用の種類、または種の）相互作用データベースに加えて、これらのデータベースを照合して、より使いやすい幅広いリソースを作成するデータベースもあります。例えば：
+
+- [stringApp](https://apps.cytoscape.org/apps/stringapp) - は [STRING(Szklarczyk et al.)](https://doi.org/10.1093/nar/gkaa1074) から protein-protein そして protein-chemical  にクエリをかけてそれをネットワークとしてCytoscapeにインポートしてくれます。
+
+この "App" のインストールもRで自動的に行えます。
 
 ```{r}
 installApp("stringApp")
 ```
 
-You can check it was successfully installed with:
+次の方法で正常にインストールされたことを確認できます:
 
 ```{r}
 getAppStatus("stringApp")
 ```
 
-### Help on specific cytoscape command
-To get information about an individual command from the R environment you can also use the commandsHelp function.
-Simply specify what command you would like to get information on by adding its name to the command.
-For example “commandsHelp("help string”)“
+### 特定のCytoscapeコマンドのヘルプ
+Rの環境から個々のコマンドに関する情報を取得するには、commandsHelp関数を使用することでできます。
+コマンドに名前を追加して、情報を取得するコマンドを指定するだけです。
+たとえば “commandsHelp("help string”)“ といったふうにです。
 
 ```{r}
 commandsHelp("help")
@@ -273,12 +283,12 @@ mesen_string_interaction_cmd <- paste('string protein query taxonID=9606 limit=1
 commandsGET(mesen_string_interaction_cmd)
 ```
 
-- cutoff: The confidence score reflects the cumulated evidence that this interaction exists. Only interactions with scores greater than this cutoff will be returned.
-- limit: The maximum number of proteins to return in addition to the query set.
-- query: Comma separated list of protein names or identifiers.
-- taxonID: The species taxonomy ID. See the NCBI taxonomy home page for IDs. If both species and taxonID are set to a different species, the taxonID has priority.
+- cutoff: 信頼スコアは、この相互作用が存在するという累積された証拠を反映しています。このカットオフよりも大きいスコアのインタラクションのみが返されます。
+- limit: クエリセットに加えて返されるタンパク質の最大数。
+- query: タンパク質名または識別子のコンマ区切りリスト。
+- taxonID: 種の分類ID。 IDについては、NCBI分類のホームページを参照してください。種とtaxonIDの両方が異なる種に設定されている場合、taxonIDが優先されます。
 
-Please see Cytoscape menubar "Help -> Automation -> CyREST Commands API" for details.
+詳細については、Cytoscapeメニューバーの "Help -> Automation -> CyREST Commands API" を参照してください。
 
 ```{r}
 exportImage("initial_string_network", type = "png")
@@ -286,34 +296,35 @@ exportImage("initial_string_network", type = "png")
 
 ![initial_string_network](https://user-images.githubusercontent.com/12192/139543384-b19ac0f3-1dc9-4e6d-a212-af4f19ab6529.png)
 
-### Layouts
-Layout the network
+### レイアウト
+ネットワークをレイアウトするのも自動的に行えます。
 
 ```{r}
 layoutNetwork('force-directed')
 ```
 
-Check what other layout algorithms are available to try out
+試してみることができる他のレイアウトアルゴリズムを確認してください。
 
 ```{r}
 getLayoutNames()
 ```
 
-### Layouts - cont'd
+### レイアウト-続き
 
-Get the parameters for a specific layout
+特定のレイアウトのパラメーターを取得する。
 
 ```{r}
 getLayoutPropertyNames(layout.name='force-directed')
 ```
 
-Re-layout the network using the force directed layout but specify some of the parameters
+force directed レイアウトを使用してネットワークを再レイアウトしますが、今度はいくつかのパラメーターを指定してみましょう。
+このような「パラメーターを変えてまた試す」といった際に「自動化」は大いに役立つことがお分かりになるでしょう。
 
 ```{r}
 layoutNetwork('force-directed defaultSpringCoefficient=0.0000008 defaultSpringLength=70')
 ```
 
-Get a screenshot of the re-laid out network
+再レイアウトされたネットワークのスクリーンショットを取得する。
 
 ```{r}
 response <- exportImage("relayout_string_network", type = "png")
@@ -323,23 +334,23 @@ response <- exportImage("relayout_string_network", type = "png")
 response
 ```
 
-String network with new layout
+新しいレイアウトのSTRINGのネットワーク
 
 ![relayout_string_network](https://user-images.githubusercontent.com/12192/139554068-55353d6a-62e2-4956-b2c6-cda4cc5a28d8.png)
 
-## Overlay our expression analysis data on the STRING network
+## STRINGネットワークに発現解析データをオーバーレイします
 
-To do this we will be using the loadTableData function from RCy3.
-It is important to make sure that that your identifiers types match up.
-You can check what is used by STRING by pulling in the column names of the node attribute table.
+これを行うには、RCy3のloadTableData関数を使用します。
+IDの種類が一致していることを確認することが重要です。
+ノード属性テーブルの列名を取得することで、STRINGが何を使用しているかを確認できます。
 
 ```{r}
 getTableColumnNames('node')
 ```
 
-## Overlay our expression data on the String network - cont'd
+## STRINGネットワークに発現解析データをオーバーレイします-続き
 
-If you are unsure of what each column is and want to further verify the column to use you can also pull in the entire node attribute table.
+各列が何であるかわからず、使用する列をさらに確認したい場合は、ノード属性テーブル全体をプルすることもできます。
 
 ```{r}
 node_attribute_table_topmesen <- getTableColumns(table="node")
@@ -348,18 +359,18 @@ head(node_attribute_table_topmesen[,3:7])
 
 ![image](https://user-images.githubusercontent.com/12192/139554236-dc19aaf7-8186-40f0-9ed3-d50a46c64d27.png)
 
-The column “display name” contains HGNC gene names which are also found in our Ovarian Cancer dataset.
+“display name” の列には、Ovarian Cancerデータセットにも含まれている HGNC 遺伝子名が含まれています。
 
-To import our expression data we will match our dataset to the “display name” node attribute.
+発現データをインポートするには、そのデータセットを “display name” ノード属性に一致させます。
 
 ```{r}
 loadTableData(RNASeq_gene_scores, table.key.column = "display name", data.key.column = "Name")  #default data.frame key is row.names
 ```
 
-## Visual Style
+## ビジュアルスタイル
 
-Modify the visual style Create your own visual style to visualize your expression data on the String network.
-Start with a default style
+ビジュアルスタイルを変更する独自の視覚スタイルを作成して、STRINGネットワーク上の発現データを可視化してみましょう。
+まずはデフォルトのスタイルから始めます。
 
 **Formatted String network**
 
