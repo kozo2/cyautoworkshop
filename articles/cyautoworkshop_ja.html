@@ -295,16 +295,16 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 <h2 class="hasAnchor">
 <a href="#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88" class="anchor"></a>サンプルデータセット</h2>
 <p>We downloaded gene expression data from the Ovarian Serous Cystadenocarcinoma project of The Cancer Genome Atlas (TCGA)(International Genome et al.), <a href="http://cancergenome.nih.gov" class="uri">http://cancergenome.nih.gov</a> via the Genomic Data Commons (GDC) portal(Grossman et al.) on 2017-06-14 using <a href="http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html">TCGABiolinks Bioconductor package(Colaprico et al.)</a>.</p>
+<p>The Cancer Genome Atlas (TCGA)(International Genome et al.) の the Ovarian Serous Cystadenocarcinoma プロジェクトから遺伝子発現データをダウンロードしました。 <a href="http://cancergenome.nih.gov" class="uri">http://cancergenome.nih.gov</a> それには2017年6月14日に <a href="http://bioconductor.org/packages/release/bioc/html/TCGAbiolinks.html">TCGABiolinks Bioconductor package(Colaprico et al.)</a>. を用いて the Genomic Data Commons (GDC) portal(Grossman et al.) 由来でデータを取得しました。</p>
 <ul>
-<li>300 samples available as RNA-seq data</li>
-<li>79 classified as Immunoreactive, 72 classified as Mesenchymal, 69 classified as Differentiated, and 80 classified as Proliferative samples</li>
-<li>RNA-seq read counts were converted to CPM values and genes with CPM &gt; 1 in at least 50 of the samples are retained for further study</li>
-<li>The data was normalized and differential expression was calculated for each cancer class relative to the rest of the samples.</li>
+<li>RNA-seq データとして利用可能な300サンプル</li>
+<li>79サンプルは Immunoreactive として, 72サンプルは Mesenchymal として, 69サンプルは Differentiated として, そして80サンプルは Proliferative サンプルとして分類されています。</li>
+<li>データは正規化され、残りのサンプルと比較して各癌クラスのdifferential expressionが計算されています。</li>
 </ul>
-<p>We will use the following table as a result of the analysis to integrate it into a interaction network:</p>
+<p>分析の結果として次の表を使用して、相互作用ネットワークに統合します:</p>
 <ul>
 <li>
-<a href="https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt">Gene ranks</a> - containing the p-values, FDR and foldchange values for the 4 comparisons (mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)</li>
+<a href="https://cytoscape.org/cytoscape-tutorials/presentations/modules/RCy3_ExampleData/data/TCGA_OV_RNAseq_All_edgeR_scores.txt">Gene ranks</a> - 4種の比較(mesenchymal vs rest, differential vs rest, proliferative vs rest and immunoreactive vs rest)に対する p-value, FDR そして foldchange の値を含んだ解析結果の行列です。</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RCurl</span><span class="op">)</span>
@@ -312,112 +312,116 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 <span class="va">RNASeq_gene_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">matrix</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">"\t"</span>, quote<span class="op">=</span><span class="st">"\""</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">RNASeq_gene_scores</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">top_mesenchymal_genes</span> <span class="op">&lt;-</span> <span class="va">RNASeq_gene_scores</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">FDR.mesen</span> <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="op">&amp;</span> <span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">logFC.mesen</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span>,<span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">top_mesenchymal_genes</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="use-case---how-are-my-top-genes-related" class="section level2">
+<div id="ユースケース-私の上位の遺伝子はどのように関連していますか" class="section level2">
 <h2 class="hasAnchor">
-<a href="#use-case---how-are-my-top-genes-related" class="anchor"></a>Use Case - How are my top genes related?</h2>
-<p>There are endless amounts of databases storing interaction data.</p>
+<a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9-%E7%A7%81%E3%81%AE%E4%B8%8A%E4%BD%8D%E3%81%AE%E9%81%BA%E4%BC%9D%E5%AD%90%E3%81%AF%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E9%96%A2%E9%80%A3%E3%81%97%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%81%8B" class="anchor"></a>ユースケース-私の上位の遺伝子はどのように関連していますか？</h2>
+<p>相互作用データを格納しているデータベースは無限にあります。</p>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139541346-9e223e88-e6df-4e4d-b7f2-a5836f6e97eb.png" alt=""><p class="caption">image</p>
 </div>
-<p>We are going to query the STRING Database to get all interactions found for our set of top Mesenchymal genes.</p>
-<div id="cytoscape-apps-with-network-data" class="section level3">
+<p>STRINGデータベースにクエリを実行して、トップのMesenchymalの遺伝子のセットに対して見つかったすべての相互作用を取得します。</p>
+<div id="ネットワークデータを使用した-cytoscape-apps" class="section level3">
 <h3 class="hasAnchor">
-<a href="#cytoscape-apps-with-network-data" class="anchor"></a>Cytoscape Apps with network data</h3>
-<p>Thankfully we don’t have to query each independently. In addition to many specialized (for example, for specific molecules, interaction type, or species) interaction databases there are also databases that collate these databases to create a broad resource that is easier to use. For example:</p>
+<a href="#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F-cytoscape-apps" class="anchor"></a>ネットワークデータを使用した Cytoscape Apps</h3>
+<p>ありがたいことに、遺伝子それぞれを個別にクエリする必要はありません。</p>
+<p>多くの特殊な（たとえば、特定の分子、相互作用の種類、または種の）相互作用データベースに加えて、これらのデータベースを照合して、より使いやすい幅広いリソースを作成するデータベースもあります。例えば：</p>
 <ul>
 <li>
-<a href="https://apps.cytoscape.org/apps/stringapp">stringApp</a> - is a protein-protein and protein-chemical database that imports data from <a href="https://doi.org/10.1093/nar/gkaa1074">STRING(Szklarczyk et al.)</a>, [STITCH] into a unified, queriable database.</li>
+<a href="https://apps.cytoscape.org/apps/stringapp">stringApp</a> - は <a href="https://doi.org/10.1093/nar/gkaa1074">STRING(Szklarczyk et al.)</a> から protein-protein そして protein-chemical にクエリをかけてそれをネットワークとしてCytoscapeにインポートしてくれます。</li>
 </ul>
-<p>You can install apps in Cytoscape directly from R.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/installApp.html">installApp</a></span><span class="op">(</span><span class="st">"stringApp"</span><span class="op">)</span></code></pre></div>
-<p>You can check it was successfully installed with:</p>
+<p>この “App” のインストールもRで自動的に行えます。</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/installApp.html">installApp</a></span><span class="op">(</span><span class="st">"stringApp"</span><span class="op">)</span></code></pre></div>
+<p>次の方法で正常にインストールされたことを確認できます:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getAppStatus.html">getAppStatus</a></span><span class="op">(</span><span class="st">"stringApp"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="help-on-specific-cytoscape-command" class="section level3">
+<div id="特定のcytoscapeコマンドのヘルプ" class="section level3">
 <h3 class="hasAnchor">
-<a href="#help-on-specific-cytoscape-command" class="anchor"></a>Help on specific cytoscape command</h3>
-<p>To get information about an individual command from the R environment you can also use the commandsHelp function. Simply specify what command you would like to get information on by adding its name to the command. For example “commandsHelp(”help string”)“</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help"</span><span class="op">)</span></code></pre></div>
+<a href="#%E7%89%B9%E5%AE%9A%E3%81%AEcytoscape%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E3%83%98%E3%83%AB%E3%83%97" class="anchor"></a>特定のCytoscapeコマンドのヘルプ</h3>
+<p>Rの環境から個々のコマンドに関する情報を取得するには、commandsHelp関数を使用することでできます。 コマンドに名前を追加して、情報を取得するコマンドを指定するだけです。 たとえば “commandsHelp(”help string”)“ といったふうにです。</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help string"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help string protein query"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help string"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsHelp.html">commandsHelp</a></span><span class="op">(</span><span class="st">"help string protein query"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mesen_string_interaction_cmd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">'string protein query taxonID=9606 limit=150 cutoff=0.9 query="'</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">top_mesenchymal_genes</span><span class="op">$</span><span class="va">Name</span>, collapse<span class="op">=</span><span class="st">","</span><span class="op">)</span>,<span class="st">'"'</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/commandsGET.html">commandsGET</a></span><span class="op">(</span><span class="va">mesen_string_interaction_cmd</span><span class="op">)</span></code></pre></div>
 <ul>
-<li>cutoff: The confidence score reflects the cumulated evidence that this interaction exists. Only interactions with scores greater than this cutoff will be returned.</li>
-<li>limit: The maximum number of proteins to return in addition to the query set.</li>
-<li>query: Comma separated list of protein names or identifiers.</li>
-<li>taxonID: The species taxonomy ID. See the NCBI taxonomy home page for IDs. If both species and taxonID are set to a different species, the taxonID has priority.</li>
+<li>cutoff: 信頼スコアは、この相互作用が存在するという累積された証拠を反映しています。このカットオフよりも大きいスコアのインタラクションのみが返されます。</li>
+<li>limit: クエリセットに加えて返されるタンパク質の最大数。</li>
+<li>query: タンパク質名または識別子のコンマ区切りリスト。</li>
+<li>taxonID: 種の分類ID。 IDについては、NCBI分類のホームページを参照してください。種とtaxonIDの両方が異なる種に設定されている場合、taxonIDが優先されます。</li>
 </ul>
-<p>Please see Cytoscape menubar “Help -&gt; Automation -&gt; CyREST Commands API” for details.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<p>詳細については、Cytoscapeメニューバーの “Help -&gt; Automation -&gt; CyREST Commands API” を参照してください。</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/exportImage.html">exportImage</a></span><span class="op">(</span><span class="st">"initial_string_network"</span>, type <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139543384-b19ac0f3-1dc9-4e6d-a212-af4f19ab6529.png" alt=""><p class="caption">initial_string_network</p>
 </div>
 </div>
-<div id="layouts" class="section level3">
+<div id="レイアウト" class="section level3">
 <h3 class="hasAnchor">
-<a href="#layouts" class="anchor"></a>Layouts</h3>
-<p>Layout the network</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/layoutNetwork.html">layoutNetwork</a></span><span class="op">(</span><span class="st">'force-directed'</span><span class="op">)</span></code></pre></div>
-<p>Check what other layout algorithms are available to try out</p>
+<a href="#%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88" class="anchor"></a>レイアウト</h3>
+<p>ネットワークをレイアウトするのも自動的に行えます。</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/layoutNetwork.html">layoutNetwork</a></span><span class="op">(</span><span class="st">'force-directed'</span><span class="op">)</span></code></pre></div>
+<p>試してみることができる他のレイアウトアルゴリズムを確認してください。</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getLayoutNames.html">getLayoutNames</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="layouts---contd" class="section level3">
+<div id="レイアウト-続き" class="section level3">
 <h3 class="hasAnchor">
-<a href="#layouts---contd" class="anchor"></a>Layouts - cont’d</h3>
-<p>Get the parameters for a specific layout</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getLayoutPropertyNames.html">getLayoutPropertyNames</a></span><span class="op">(</span>layout.name<span class="op">=</span><span class="st">'force-directed'</span><span class="op">)</span></code></pre></div>
-<p>Re-layout the network using the force directed layout but specify some of the parameters</p>
+<a href="#%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88-%E7%B6%9A%E3%81%8D" class="anchor"></a>レイアウト-続き</h3>
+<p>特定のレイアウトのパラメーターを取得する。</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/layoutNetwork.html">layoutNetwork</a></span><span class="op">(</span><span class="st">'force-directed defaultSpringCoefficient=0.0000008 defaultSpringLength=70'</span><span class="op">)</span></code></pre></div>
-<p>Get a screenshot of the re-laid out network</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getLayoutPropertyNames.html">getLayoutPropertyNames</a></span><span class="op">(</span>layout.name<span class="op">=</span><span class="st">'force-directed'</span><span class="op">)</span></code></pre></div>
+<p>force directed レイアウトを使用してネットワークを再レイアウトしますが、今度はいくつかのパラメーターを指定してみましょう。 このような「パラメーターを変えてまた試す」といった際に「自動化」は大いに役立つことがお分かりになるでしょう。</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">response</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/exportImage.html">exportImage</a></span><span class="op">(</span><span class="st">"relayout_string_network"</span>, type <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/layoutNetwork.html">layoutNetwork</a></span><span class="op">(</span><span class="st">'force-directed defaultSpringCoefficient=0.0000008 defaultSpringLength=70'</span><span class="op">)</span></code></pre></div>
+<p>再レイアウトされたネットワークのスクリーンショットを取得する。</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">response</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/exportImage.html">exportImage</a></span><span class="op">(</span><span class="st">"relayout_string_network"</span>, type <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">response</span></code></pre></div>
-<p>String network with new layout</p>
+<p>新しいレイアウトのSTRINGのネットワーク</p>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139554068-55353d6a-62e2-4956-b2c6-cda4cc5a28d8.png" alt=""><p class="caption">relayout_string_network</p>
 </div>
 </div>
 </div>
-<div id="overlay-our-expression-analysis-data-on-the-string-network" class="section level2">
+<div id="stringネットワークに発現解析データをオーバーレイします" class="section level2">
 <h2 class="hasAnchor">
-<a href="#overlay-our-expression-analysis-data-on-the-string-network" class="anchor"></a>Overlay our expression analysis data on the STRING network</h2>
-<p>To do this we will be using the loadTableData function from RCy3. It is important to make sure that that your identifiers types match up. You can check what is used by STRING by pulling in the column names of the node attribute table.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<a href="#string%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AB%E7%99%BA%E7%8F%BE%E8%A7%A3%E6%9E%90%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AC%E3%82%A4%E3%81%97%E3%81%BE%E3%81%99" class="anchor"></a>STRINGネットワークに発現解析データをオーバーレイします</h2>
+<p>これを行うには、RCy3のloadTableData関数を使用します。 IDの種類が一致していることを確認することが重要です。 ノード属性テーブルの列名を取得することで、STRINGが何を使用しているかを確認できます。</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getTableColumnNames.html">getTableColumnNames</a></span><span class="op">(</span><span class="st">'node'</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="overlay-our-expression-data-on-the-string-network---contd" class="section level2">
+<div id="stringネットワークに発現解析データをオーバーレイします-続き" class="section level2">
 <h2 class="hasAnchor">
-<a href="#overlay-our-expression-data-on-the-string-network---contd" class="anchor"></a>Overlay our expression data on the String network - cont’d</h2>
-<p>If you are unsure of what each column is and want to further verify the column to use you can also pull in the entire node attribute table.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<a href="#string%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AB%E7%99%BA%E7%8F%BE%E8%A7%A3%E6%9E%90%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AC%E3%82%A4%E3%81%97%E3%81%BE%E3%81%99-%E7%B6%9A%E3%81%8D" class="anchor"></a>STRINGネットワークに発現解析データをオーバーレイします-続き</h2>
+<p>各列が何であるかわからず、使用する列をさらに確認したい場合は、ノード属性テーブル全体をプルすることもできます。</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">node_attribute_table_topmesen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getTableColumns.html">getTableColumns</a></span><span class="op">(</span>table<span class="op">=</span><span class="st">"node"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">node_attribute_table_topmesen</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139554236-dc19aaf7-8186-40f0-9ed3-d50a46c64d27.png" alt=""><p class="caption">image</p>
 </div>
-<p>The column “display name” contains HGNC gene names which are also found in our Ovarian Cancer dataset.</p>
-<p>To import our expression data we will match our dataset to the “display name” node attribute.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<p>“display name” の列には、Ovarian Cancerデータセットにも含まれている HGNC 遺伝子名が含まれています。</p>
+<p>発現データをインポートするには、そのデータセットを “display name” ノード属性に一致させます。</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/loadTableData.html">loadTableData</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span>, table.key.column <span class="op">=</span> <span class="st">"display name"</span>, data.key.column <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span>  <span class="co">#default data.frame key is row.names</span></code></pre></div>
 </div>
-<div id="visual-style" class="section level2">
+<div id="ビジュアルスタイル" class="section level2">
 <h2 class="hasAnchor">
-<a href="#visual-style" class="anchor"></a>Visual Style</h2>
-<p>Modify the visual style Create your own visual style to visualize your expression data on the String network. Start with a default style</p>
+<a href="#%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB" class="anchor"></a>ビジュアルスタイル</h2>
+<p>ビジュアルスタイルを変更する独自の視覚スタイルを作成して、STRINGネットワーク上の発現データを可視化してみましょう。 まずはデフォルトのスタイルから始めます。</p>
 <p><strong>Formatted String network</strong></p>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139555494-3d46d339-153d-4c93-bf06-c393375ba2be.png" alt=""><p class="caption">mesen_string_network</p>
