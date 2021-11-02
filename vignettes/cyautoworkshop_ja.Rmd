@@ -372,6 +372,86 @@ loadTableData(RNASeq_gene_scores, table.key.column = "display name", data.key.co
 ビジュアルスタイルを変更する独自の視覚スタイルを作成して、STRINGネットワーク上の発現データを可視化してみましょう。
 まずはデフォルトのスタイルから始めます。
 
-**Formatted String network**
+**フォーマットされたSTRINGネットワーク**
 
 ![mesen_string_network](https://user-images.githubusercontent.com/12192/139555494-3d46d339-153d-4c93-bf06-c393375ba2be.png)
+
+```{r}
+style.name = "MesenchymalStyle"
+defaults.list <- list(NODE_SHAPE="ellipse",
+                 NODE_SIZE=60,
+                 NODE_FILL_COLOR="#AAAAAA",
+                 EDGE_TRANSPARENCY=120)
+# p for passthrough; nothing else needed
+node.label.map <- mapVisualProperty('node label','display name','p') 
+createVisualStyle(style.name, defaults.list, list(node.label.map))
+setVisualStyle(style.name=style.name)
+```
+
+### ビジュアルスタイル-続き
+MesenchymalのlogFCの発現に対するマッピングを使用して、作成したスタイルを更新します。
+最初のステップは、Cytoscapeから列データを取得し（上記のnode_attributeテーブルの概念を再利用できますが、式データを追加したので、関数を再度呼び出す必要があります）、最小値と最大値を引き出して値の範囲に対するデータマッピングを定義します。 
+
+注：データセット全体、または現在Cytoscapeで表されているサブセットのみに基づいて最小値と最大値を定義できます。2つの方法では、異なる結果が得られます。 同じデータセットで作成された異なるネットワークを比較する場合は、サブセットではなく、データセット全体から最小値と最大値を計算するのが最善です。
+
+```{r}
+min.mesen.logfc = min(RNASeq_gene_scores$logFC.mesen,na.rm=TRUE)
+max.mesen.logfc = max(RNASeq_gene_scores$logFC.mesen,na.rm=TRUE)
+data.values = c(min.mesen.logfc,0,max.mesen.logfc)
+```
+
+### ビジュアルスタイル-続き
+次に、RColorBrewer パッケージを使用して、データ値と組み合わせるのに適した色を選択します。
+```{r}
+library(RColorBrewer)
+display.brewer.all(length(data.values), colorblindFriendly=TRUE, type="div")
+```
+
+### ノードの色を logFC に。
+```{r}
+node.colors <- c(rev(brewer.pal(length(data.values), "RdBu")))
+```
+色をデータ値にマッピングし、ビジュアルスタイルを更新します。
+```{r}
+setNodeColorMapping("logFC.mesen", data.values, node.colors, style.name=style.name)
+```
+
+### ビジュアルスタイル-続き
+STRINGには、クエリタンパク質と、クエリタンパク質に関連する他のタンパク質（最初に最も強い接続を含む）が含まれることを忘れないでください。
+このネットワークのすべてのタンパク質があなたのトップヒットであるわけではありません。どのタンパク質がトップMesenchymalヒットであるかをどのように可視化できますか？
+
+別の(境界線の)色を追加するか、トップヒットのノードの形状を変更してみましょう。
+```{r}
+getNodeShapes()
+
+#select the Nodes of interest
+#selectNode(nodes = top_mesenchymal_genes$Name, by.col="display name")
+setNodeShapeBypass(node.names = top_mesenchymal_genes$Name, new.shapes = "TRIANGLE")
+```
+
+### ビジュアルスタイル-続き
+最後に Mesenchymal の p-value と相関するノードのサイズを変更しましょう。
+
+```{r}
+setNodeSizeMapping(table.column = 'LR.mesen', 
+                   table.column.values = c(min(RNASeq_gene_scores$LR.mesen), 
+                                           mean(RNASeq_gene_scores$LR.mesen), 
+                                           max(RNASeq_gene_scores$LR.mesen)), 
+                   sizes = c(30, 60, 150), mapping.type = "c", style.name = style.name)
+```
+
+
+# ありがとうございました!
+これで基本的なしくみだけでなく論文のような図を作る実践的な方法も学習できましたね。
+
+役立つと思われる追加のリソースは次のとおりです:
+
+- manual.cytoscape.org
+- tutorials.cytoscape.org
+- automation.cytoscape.org
+- apps.cytoscape.org
+- cytoscape-publications.tumblr.com
+- [cytoscape help page](https://cytoscape.org/documentation_users.html)
+- [cytoscape developer page](https://cytoscape.org/documentation_developers.html)
+- [nrnb.org/training.html](http://nrnb.org/training.html)
+
