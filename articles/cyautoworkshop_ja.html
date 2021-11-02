@@ -422,11 +422,87 @@ IRdisplay::display_javascript(browserClientJs)</code></pre>
 <h2 class="hasAnchor">
 <a href="#%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB" class="anchor"></a>ビジュアルスタイル</h2>
 <p>ビジュアルスタイルを変更する独自の視覚スタイルを作成して、STRINGネットワーク上の発現データを可視化してみましょう。 まずはデフォルトのスタイルから始めます。</p>
-<p><strong>Formatted String network</strong></p>
+<p><strong>フォーマットされたSTRINGネットワーク</strong></p>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/12192/139555494-3d46d339-153d-4c93-bf06-c393375ba2be.png" alt=""><p class="caption">mesen_string_network</p>
 </div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">style.name</span> <span class="op">=</span> <span class="st">"MesenchymalStyle"</span>
+<span class="va">defaults.list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>NODE_SHAPE<span class="op">=</span><span class="st">"ellipse"</span>,
+                 NODE_SIZE<span class="op">=</span><span class="fl">60</span>,
+                 NODE_FILL_COLOR<span class="op">=</span><span class="st">"#AAAAAA"</span>,
+                 EDGE_TRANSPARENCY<span class="op">=</span><span class="fl">120</span><span class="op">)</span>
+<span class="co"># p for passthrough; nothing else needed</span>
+<span class="va">node.label.map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/mapVisualProperty.html">mapVisualProperty</a></span><span class="op">(</span><span class="st">'node label'</span>,<span class="st">'display name'</span>,<span class="st">'p'</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/createVisualStyle.html">createVisualStyle</a></span><span class="op">(</span><span class="va">style.name</span>, <span class="va">defaults.list</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">node.label.map</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/setVisualStyle.html">setVisualStyle</a></span><span class="op">(</span>style.name<span class="op">=</span><span class="va">style.name</span><span class="op">)</span></code></pre></div>
+<div id="ビジュアルスタイル-続き" class="section level3">
+<h3 class="hasAnchor">
+<a href="#%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB-%E7%B6%9A%E3%81%8D" class="anchor"></a>ビジュアルスタイル-続き</h3>
+<p>MesenchymalのlogFCの発現に対するマッピングを使用して、作成したスタイルを更新します。 最初のステップは、Cytoscapeから列データを取得し（上記のnode_attributeテーブルの概念を再利用できますが、式データを追加したので、関数を再度呼び出す必要があります）、最小値と最大値を引き出して値の範囲に対するデータマッピングを定義します。</p>
+<p>注：データセット全体、または現在Cytoscapeで表されているサブセットのみに基づいて最小値と最大値を定義できます。2つの方法では、異なる結果が得られます。 同じデータセットで作成された異なるネットワークを比較する場合は、サブセットではなく、データセット全体から最小値と最大値を計算するのが最善です。</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">min.mesen.logfc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">logFC.mesen</span>,na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">max.mesen.logfc</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">logFC.mesen</span>,na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">data.values</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">min.mesen.logfc</span>,<span class="fl">0</span>,<span class="va">max.mesen.logfc</span><span class="op">)</span></code></pre></div>
 </div>
+<div id="ビジュアルスタイル-続き-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB-%E7%B6%9A%E3%81%8D-1" class="anchor"></a>ビジュアルスタイル-続き</h3>
+<p>次に、RColorBrewer パッケージを使用して、データ値と組み合わせるのに適した色を選択します。</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">display.brewer.all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">data.values</span><span class="op">)</span>, colorblindFriendly<span class="op">=</span><span class="cn">TRUE</span>, type<span class="op">=</span><span class="st">"div"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="ノードの色を-logfc-に" class="section level3">
+<h3 class="hasAnchor">
+<a href="#%E3%83%8E%E3%83%BC%E3%83%89%E3%81%AE%E8%89%B2%E3%82%92-logfc-%E3%81%AB" class="anchor"></a>ノードの色を logFC に。</h3>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">node.colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">data.values</span><span class="op">)</span>, <span class="st">"RdBu"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>色をデータ値にマッピングし、ビジュアルスタイルを更新します。</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/setNodeColorMapping.html">setNodeColorMapping</a></span><span class="op">(</span><span class="st">"logFC.mesen"</span>, <span class="va">data.values</span>, <span class="va">node.colors</span>, style.name<span class="op">=</span><span class="va">style.name</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="ビジュアルスタイル-続き-2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB-%E7%B6%9A%E3%81%8D-2" class="anchor"></a>ビジュアルスタイル-続き</h3>
+<p>STRINGには、クエリタンパク質と、クエリタンパク質に関連する他のタンパク質（最初に最も強い接続を含む）が含まれることを忘れないでください。 このネットワークのすべてのタンパク質があなたのトップヒットであるわけではありません。どのタンパク質がトップMesenchymalヒットであるかをどのように可視化できますか？</p>
+<p>別の(境界線の)色を追加するか、トップヒットのノードの形状を変更してみましょう。</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/getNodeShapes.html">getNodeShapes</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="co">#select the Nodes of interest</span>
+<span class="co">#selectNode(nodes = top_mesenchymal_genes$Name, by.col="display name")</span>
+<span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/setNodeShapeBypass.html">setNodeShapeBypass</a></span><span class="op">(</span>node.names <span class="op">=</span> <span class="va">top_mesenchymal_genes</span><span class="op">$</span><span class="va">Name</span>, new.shapes <span class="op">=</span> <span class="st">"TRIANGLE"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="ビジュアルスタイル-続き-3" class="section level3">
+<h3 class="hasAnchor">
+<a href="#%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB-%E7%B6%9A%E3%81%8D-3" class="anchor"></a>ビジュアルスタイル-続き</h3>
+<p>最後に Mesenchymal の p-value と相関するノードのサイズを変更しましょう。</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/RCy3/man/setNodeSizeMapping.html">setNodeSizeMapping</a></span><span class="op">(</span>table.column <span class="op">=</span> <span class="st">'LR.mesen'</span>, 
+                   table.column.values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">LR.mesen</span><span class="op">)</span>, 
+                                           <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">LR.mesen</span><span class="op">)</span>, 
+                                           <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">RNASeq_gene_scores</span><span class="op">$</span><span class="va">LR.mesen</span><span class="op">)</span><span class="op">)</span>, 
+                   sizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">60</span>, <span class="fl">150</span><span class="op">)</span>, mapping.type <span class="op">=</span> <span class="st">"c"</span>, style.name <span class="op">=</span> <span class="va">style.name</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="ありがとうございました" class="section level1">
+<h1 class="hasAnchor">
+<a href="#%E3%81%82%E3%82%8A%E3%81%8C%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F" class="anchor"></a>ありがとうございました!</h1>
+<p>これで基本的なしくみだけでなく論文のような図を作る実践的な方法も学習できましたね。</p>
+<p>役立つと思われる追加のリソースは次のとおりです:</p>
+<ul>
+<li>manual.cytoscape.org</li>
+<li>tutorials.cytoscape.org</li>
+<li>automation.cytoscape.org</li>
+<li>apps.cytoscape.org</li>
+<li>cytoscape-publications.tumblr.com</li>
+<li><a href="https://cytoscape.org/documentation_users.html">cytoscape help page</a></li>
+<li><a href="https://cytoscape.org/documentation_developers.html">cytoscape developer page</a></li>
+<li><a href="http://nrnb.org/training.html">nrnb.org/training.html</a></li>
+</ul>
 </div>
   </div>
 
